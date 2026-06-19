@@ -1,0 +1,18 @@
+# dependencies
+node_modules/
+
+# next.js build output
+.next/
+out/
+dist/
+
+# logs
+*.log
+npm-debug.log*
+
+# os / editor
+.DS_Store
+Thumbs.db
+
+# scratch
+_make_logo.py
