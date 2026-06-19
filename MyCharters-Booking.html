@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Your Charter | MyCharters Malta</title>
+<meta name="description" content="Request your private boat charter with MyCharters Malta. Secure your date with a €100 deposit — free cancellation up to 24 hours before departure.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy-deep:#0B2A47; --navy:#0E3456; --navy-soft:#1A4A77;
+  --ocean:#4D9FDB; --ocean-mist:#BBDDF2;
+  --coral:#F4775C; --coral-light:#F89C86; --coral-deep:#DE5B40;
+  --sand:#EAF4FB; --foam:#F7FBFE;
+  --shadow-md:0 8px 30px rgba(6,18,31,.30);
+  --shadow-lg:0 24px 60px rgba(0,0,0,.45);
+  --shadow-coral:0 10px 34px rgba(244,119,92,.42);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-spring:cubic-bezier(.34,1.56,.64,1);
+  --r-lg:22px; --r-md:16px; --r-sm:12px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--navy);color:#fff;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
+svg{display:block}
+a{text-decoration:none;color:inherit}
+::selection{background:var(--coral);color:#fff}
+:focus-visible{outline:2px solid var(--coral);outline-offset:3px;border-radius:4px}
+.container{max-width:840px;margin:0 auto;padding:0 24px;width:100%}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--coral-light)}
+.gold-divider{height:2px;width:64px;margin:24px auto 0;background:linear-gradient(90deg,transparent,var(--coral),transparent);border-radius:2px}
+.glass-dark{background:rgba(8,24,40,.55);border:1px solid rgba(255,255,255,.10);backdrop-filter:blur(20px)}
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:9px;border-radius:999px;padding:16px 34px;font-size:13px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;cursor:pointer;border:none;transition:transform .35s var(--ease-out),box-shadow .35s var(--ease-out),background .3s,color .3s,border-color .3s}
+.btn:active{transform:scale(.97)}
+.btn-coral{background:var(--coral);color:#fff;box-shadow:var(--shadow-md)}
+.btn-coral:hover{background:var(--coral-light);box-shadow:var(--shadow-coral);transform:translateY(-2px)}
+.btn-coral:disabled{opacity:.6;cursor:wait;transform:none}
+.btn-ghost{border:1px solid rgba(255,255,255,.45);color:#fff;background:rgba(255,255,255,.04)}
+.btn-ghost:hover{border-color:var(--coral);background:rgba(244,119,92,.16);transform:translateY(-2px)}
+.btn .ico{width:16px;height:16px}
+
+/* header */
+header{background:var(--navy-deep);padding:16px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+header .row{max-width:1160px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:inline-flex;align-items:center;gap:11px}
+.logo-mark{height:44px;width:44px;transition:transform .5s var(--ease-spring)}
+.logo:hover .logo-mark{transform:rotate(-6deg) scale(1.05)}
+.logo-word{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:#fff}
+.logo-word span{color:var(--coral)}
+.back{display:inline-flex;align-items:center;gap:7px;font-size:14px;color:rgba(255,255,255,.8);transition:color .3s,gap .3s}
+.back:hover{color:var(--coral);gap:11px}
+.back .ico{width:16px;height:16px}
+
+/* intro */
+.intro{text-align:center;padding:64px 0 0}
+.intro h1{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,6vw,54px);font-weight:500;line-height:1.08;letter-spacing:-.01em;margin-top:14px}
+.intro h1 em{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--coral-light)}
+.intro p.lede{margin:18px auto 0;max-width:560px;color:rgba(255,255,255,.72);line-height:1.7;font-size:15px}
+
+/* form */
+main{flex:1;padding-bottom:40px}
+.form-card{border-radius:var(--r-lg);padding:42px 40px;margin:44px 0 28px}
+@media(max-width:560px){.form-card{padding:30px 22px}}
+.bk-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:560px){.bk-grid{grid-template-columns:1fr}}
+.field label{display:block;font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.62);margin-bottom:8px}
+.field .req{color:var(--coral-light)}
+.field input,.field select,.field textarea{width:100%;border-radius:var(--r-sm);border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);padding:14px 16px;font-size:14px;color:#fff;font-family:'Inter';color-scheme:dark;transition:border-color .3s,box-shadow .3s}
+.field input::placeholder,.field textarea::placeholder{color:rgba(255,255,255,.38)}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--coral);box-shadow:0 0 0 3px rgba(244,119,92,.20)}
+.field select option{color:var(--navy)}
+.span2{grid-column:1/-1}
+.check-row{display:flex;align-items:flex-start;gap:12px}
+.check-row input{width:20px;height:20px;margin-top:1px;flex-shrink:0;accent-color:var(--coral);cursor:pointer}
+.check-row label{font-size:13.5px;line-height:1.6;color:rgba(255,255,255,.74)}
+.check-row a{color:var(--coral-light);text-decoration:underline}
+.bk-error{display:none;color:#ffb4a0;font-size:13.5px;line-height:1.5;padding:12px 14px;border-radius:var(--r-sm);background:rgba(244,119,92,.12);border:1px solid rgba(244,119,92,.3)}
+.form-note{margin-top:12px;text-align:center;font-size:12px;color:rgba(255,255,255,.45)}
+.bk-success{text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px;padding:8px 0}
+.bk-success h3{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:500}
+.bk-success p{font-size:14px;line-height:1.7;color:rgba(255,255,255,.72);max-width:440px}
+.bk-badge{width:60px;height:60px;border-radius:999px;background:var(--coral);color:#fff;display:flex;align-items:center;justify-content:center}
+.bk-badge .ico{width:28px;height:28px}
+.bk-success .btn{width:100%;max-width:360px}
+
+.contact-line{text-align:center;padding:8px 0 48px;font-size:14px;color:rgba(255,255,255,.55);line-height:1.9}
+.contact-line a{color:rgba(255,255,255,.85);text-decoration:underline}
+.contact-line a:hover{color:var(--coral)}
+
+footer{background:var(--navy-deep);padding:26px 0;text-align:center;font-size:12px;color:rgba(255,255,255,.4)}
+footer a{text-decoration:underline}
+footer a:hover{color:var(--coral)}
+
+/* date picker + calendar */
+.date-btn{width:100%;display:flex;justify-content:space-between;align-items:center;gap:10px;border-radius:var(--r-sm);border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);padding:14px 16px;font-size:14px;color:#fff;cursor:pointer;font-family:'Inter';text-align:left;transition:border-color .3s,box-shadow .3s}
+.date-btn:hover{border-color:rgba(255,255,255,.34)}
+.date-btn:focus-visible{outline:none;border-color:var(--coral);box-shadow:0 0 0 3px rgba(244,119,92,.2)}
+.date-btn .ico{width:17px;height:17px;color:rgba(255,255,255,.6);flex-shrink:0}
+.cal{position:absolute;top:100%;left:0;z-index:40;margin-top:8px;width:312px;max-width:calc(100vw - 48px);background:rgba(11,26,42,.96);border:1px solid var(--glass-brd);border-radius:var(--r-md);padding:16px;box-shadow:var(--shadow-lg);backdrop-filter:blur(22px) saturate(140%);-webkit-backdrop-filter:blur(22px) saturate(140%)}
+.cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.cal-title{font-family:'Cormorant Garamond',serif;font-size:20px;color:#fff}
+.cal-nav{width:32px;height:32px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .3s,border-color .3s,color .3s}
+.cal-nav:hover:not(:disabled){border-color:var(--coral);color:var(--coral);background:rgba(244,119,92,.12)}
+.cal-nav:disabled{opacity:.3;cursor:not-allowed}
+.cal-nav .ico{width:16px;height:16px}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;text-align:center}
+.cal-dow{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.45);padding:6px 0}
+.cal-day{height:36px;border-radius:9px;border:none;background:none;color:#fff;font-size:13px;font-family:'Inter';cursor:pointer;transition:background .2s,color .2s,transform .2s}
+.cal-day:hover:not(:disabled){background:rgba(244,119,92,.30);transform:scale(1.06)}
+.cal-day:disabled{cursor:not-allowed}
+.cal-day.past{color:rgba(255,255,255,.22)}
+.cal-day.booked{color:var(--coral-light);opacity:.75;text-decoration:line-through;text-decoration-thickness:2px}
+.cal-day.selected{background:var(--coral);color:#fff;font-weight:600}
+.cal-legend{display:flex;gap:18px;align-items:center;margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,.12);font-size:11px;color:rgba(255,255,255,.55)}
+.cal-legend .dot{display:inline-block;width:8px;height:8px;border-radius:99px;background:rgba(255,255,255,.85);margin-right:6px;vertical-align:middle}
+.cal-legend .bx{color:var(--coral-light);text-decoration:line-through;text-decoration-thickness:2px}
+/* terms modal */
+.terms-overlay{position:fixed;inset:0;z-index:90;display:none;align-items:center;justify-content:center;background:rgba(6,18,31,.72);backdrop-filter:blur(6px);padding:20px}
+.terms-overlay.open{display:flex}
+.terms-modal{position:relative;background:#fff;color:var(--navy);width:100%;max-width:760px;max-height:85vh;overflow-y:auto;border-radius:var(--r-lg);padding:46px 40px;box-shadow:var(--shadow-lg)}
+.terms-modal h2{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:500}
+.terms-modal h3{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;margin-top:28px}
+.terms-modal p{margin-top:10px;line-height:1.7;color:rgba(10,27,46,.75);font-size:14.5px}
+.terms-modal ul{margin:10px 0 0 20px;color:rgba(10,27,46,.75);font-size:14.5px;line-height:1.7}
+.terms-close{position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:999px;border:1px solid rgba(10,27,46,.15);background:#fff;color:var(--navy);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .3s,color .3s,border-color .3s}
+.terms-close:hover{background:var(--coral);border-color:var(--coral);color:#fff}
+.terms-close .ico{width:18px;height:18px}
+@media(max-width:560px){.terms-modal{padding:40px 22px}}
+@media(prefers-reduced-motion:reduce){*{transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F58E6F"/><stop offset="1" stop-color="#ED6B4B"/></linearGradient>
+  <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#57A7DF"/><stop offset="1" stop-color="#2F84C6"/></linearGradient>
+  <linearGradient id="fin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C9E4F7"/><stop offset="1" stop-color="#93C5EC"/></linearGradient>
+  <g id="brandmark">
+    <circle cx="120" cy="112" r="94" fill="url(#sun)"/>
+    <clipPath id="disc"><circle cx="120" cy="112" r="94"/></clipPath>
+    <g clip-path="url(#disc)">
+      <path d="M 20,140 C 58,118 94,130 122,125 C 152,119 164,96 198,102 L 218,140 L 218,210 L 20,210 Z" fill="#FFFFFF"/>
+      <path d="M 20,152 C 58,132 96,142 124,137 C 142,134 150,129 155,123 C 161,115 172,110 181,112 C 174,120 169,127 173,130 C 187,123 202,127 212,136 L 218,152 L 218,210 L 20,210 Z" fill="url(#sea)"/>
+    </g>
+    <g stroke="#FFFFFF" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" fill="url(#fin)">
+      <path d="M 88,127 C 79,122 68,122 59,127 C 66,133 70,140 70,149 C 77,141 84,136 94,134 Z"/>
+      <path d="M 84,133 C 87,109 99,83 120,71 C 121,55 130,45 142,42 C 141,53 137,62 132,67 C 148,69 161,79 169,92 C 175,100 178,108 176,113 C 171,114 165,110 160,106 C 152,117 138,126 122,129 C 109,131 96,132 84,133 Z"/>
+      <path d="M 130,123 C 136,129 139,137 136,144 C 129,138 124,130 124,123 Z"/>
+    </g>
+  </g>
+</defs></svg>
+
+<header>
+  <div class="row">
+    <a href="MyCharters-Preview.html" class="logo" aria-label="MyCharters home">
+      <img class="logo-mark" src="mycharters-logo.png" alt="MyCharters">
+
+      <span class="logo-word">My<span>Charters</span></span>
+    </a>
+    <a href="MyCharters-Preview.html" class="back"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>Back to home</a>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <div class="intro">
+      <p class="eyebrow">Book Your Charter</p>
+      <h1>Two minutes to the<br><em>best day of your trip.</em></h1>
+      <p class="lede">Tell us who's coming and when. Your date is secured once the €100 deposit is received — free cancellation up to 24 hours before departure.</p>
+      <div class="gold-divider"></div>
+    </div>
+
+    <div class="form-card glass-dark" id="bookCard">
+      <form id="bookForm" class="bk-grid" novalidate>
+        <div class="field"><label for="fFirst">Name <span class="req">*</span></label><input id="fFirst" required autocomplete="given-name" placeholder="Jane"></div>
+        <div class="field"><label for="fSur">Surname <span class="req">*</span></label><input id="fSur" required autocomplete="family-name" placeholder="Smith"></div>
+        <div class="field"><label for="fPhone">Phone number <span class="req">*</span></label><input id="fPhone" type="tel" required autocomplete="tel" placeholder="+356 9912 3456"></div>
+        <div class="field"><label for="fAddr">Address <span class="req">*</span></label><input id="fAddr" required autocomplete="street-address" placeholder="Street, town, country"></div>
+        <div class="field" style="position:relative"><label for="fDateBtn">Preferred date <span class="req">*</span></label>
+          <button type="button" id="fDateBtn" class="date-btn" aria-haspopup="dialog" aria-expanded="false">
+            <span id="fDateLabel" style="color:rgba(255,255,255,.4)">Select a date</span>
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg>
+          </button>
+          <div class="cal" id="calBox" hidden></div>
+        </div>
+        <div class="field"><label for="fExp">Charter type <span class="req">*</span></label>
+          <select id="fExp" required>
+            <option value="" disabled selected>Select a charter</option>
+            <option>Harbour Cruise</option><option>Half Day</option>
+            <option>Day Charter</option><option>Comino Day</option>
+            <option>Sunset Cruise</option><option>Custom</option>
+          </select>
+        </div>
+        <div class="field"><label for="fGuests">Number of people boarding <span class="req">*</span></label><input id="fGuests" type="number" min="1" max="10" required placeholder="e.g. 4"></div>
+        <div class="field"><label for="fFood">Food choice (platter included) <span class="req">*</span></label>
+          <select id="fFood" required>
+            <option value="" disabled selected>Select a package</option>
+            <option>High-End Package (platter included)</option>
+            <option>Basic Package (platter included)</option>
+          </select>
+        </div>
+        <div class="field span2"><label for="fAllergy">Any allergies or dietary requirements? (optional)</label><textarea id="fAllergy" rows="3" placeholder="e.g. nut allergy, vegetarian, gluten-free…"></textarea></div>
+        <div class="span2 check-row">
+          <input id="fTerms" type="checkbox" required>
+          <label for="fTerms">I have read and accept the <a href="#" onclick="openTerms(event)">Terms &amp; Conditions</a>, including the 24-hour cancellation policy. <span class="req">*</span></label>
+        </div>
+        <div class="span2"><p class="bk-error" id="bkError" role="alert" aria-live="assertive"></p></div>
+        <div class="span2">
+          <button type="submit" class="btn btn-coral" style="width:100%" id="bookBtn">Request Booking &amp; Pay €100 Deposit</button>
+          <p class="form-note">On submit we email your request, open WhatsApp with your details, then take you to the secure €100 Stripe deposit.</p>
+        </div>
+      </form>
+    </div>
+
+    <p class="contact-line">
+      Prefer to talk it through? WhatsApp <a href="https://wa.me/35679361991" target="_blank" rel="noopener">+356 7936 1991</a> or <a href="https://wa.me/35677019333" target="_blank" rel="noopener">+356 7701 9333</a><br>
+      or email <a href="mailto:mychartersinfo@gmail.com">mychartersinfo@gmail.com</a><br>
+      Departures from Grand Harbour Marina, Birgu (Vittoriosa), Malta
+    </p>
+  </div>
+</main>
+
+<div class="terms-overlay" id="termsOverlay" role="dialog" aria-modal="true" aria-label="Terms and Conditions">
+  <div class="terms-modal">
+    <button class="terms-close" onclick="closeTerms()" aria-label="Close"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    <h2>MyCharters — Terms &amp; Conditions</h2>
+    <h3>1. Booking Confirmation</h3>
+    <p>All bookings with MyCharters are considered confirmed once the required deposit has been received and the customer receives a booking confirmation. MyCharters reserves the right to refuse or cancel bookings where necessary for operational, safety, or legal reasons.</p>
+    <h3>2. Payment Terms</h3>
+    <ul><li>A €100 deposit is required to secure the booking.</li><li>The remaining balance is paid after the charter unless otherwise agreed in writing.</li><li>Additional services, fuel surcharges, damages, or overtime may incur extra charges.</li></ul>
+    <h3>3. 24-Hour Cancellation Policy</h3>
+    <ul><li>More than 24 hours before departure: full refund of any deposit paid.</li><li>Less than 24 hours before departure: deposit is non-refundable.</li><li>No-shows or late arrivals are treated as a cancellation within 24 hours; deposit non-refundable.</li></ul>
+    <h3>4. Food &amp; Beverages</h3>
+    <ul><li>Guests must inform MyCharters in advance of any allergies or dietary requirements.</li><li>MyCharters is not liable for reactions arising from undisclosed dietary conditions.</li><li>Outside food and beverages require prior approval.</li></ul>
+    <h3>5. Weather &amp; Force Majeure</h3>
+    <p>MyCharters may cancel, delay, or reschedule for unsafe weather, mechanical issues, government restrictions or safety concerns. In such cases customers are offered a rescheduled booking or a full refund of any deposit paid.</p>
+    <h3>6. Customer Responsibilities</h3>
+    <p>Guests must follow crew safety instructions, behave responsibly, and comply with local maritime law. MyCharters may terminate a charter without refund for dangerous, illegal or abusive behaviour.</p>
+    <h3>7. Damage &amp; Liability</h3>
+    <p>Customers are responsible for damage caused by their group. MyCharters is not liable for loss of personal belongings or injuries from failure to follow safety instructions. Participation is at the customer's own risk.</p>
+    <h3>8. Arrival Time</h3>
+    <p>Please arrive 15–30 minutes before departure. Late arrival may reduce charter time without refund or extension.</p>
+    <h3>9. Acceptance of Terms</h3>
+    <p>By confirming a booking with MyCharters, the customer acknowledges and agrees to these Terms &amp; Conditions.</p>
+  </div>
+</div>
+
+<footer>
+  © <span id="year"></span> MyCharters · <a href="MyCharters-Preview.html">Home</a> · Grand Harbour Marina, Birgu
+</footer>
+
+<script>
+// CONFIG — replace these two before going live:
+//  1. WEB3FORMS_KEY: free key from https://web3forms.com (register mychartersinfo@gmail.com).
+//  2. STRIPE_LINK: a €100 "Charter deposit" Payment Link from your Stripe dashboard.
+const WA_NUM = "35679361991";
+const EMAIL = "mychartersinfo@gmail.com";
+const WEB3FORMS_KEY = "YOUR_WEB3FORMS_ACCESS_KEY";
+const STRIPE_LINK = "https://buy.stripe.com/REPLACE_WITH_YOUR_LINK";
+const BOOKED_DATES = ["2026-06-15","2026-06-19","2026-06-27","2026-07-04"];
+
+document.getElementById("year").textContent = new Date().getFullYear();
+
+// Pre-fill charter from homepage links (?charter=…)
+const params = new URLSearchParams(location.search);
+const preCharter = params.get("charter");
+if (preCharter) document.getElementById("fExp").value = preCharter;
+
+// ----- Availability calendar -----
+// Authoritative booked list: add a "YYYY-MM-DD" line to BOOKED_DATES (top of script)
+// to cross a date out for EVERY visitor. Dates the user pays for are also remembered
+// locally (this device) so they show crossed out immediately.
+const MONTH_NAMES = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+function bookedSet(){
+  let local = [];
+  try { local = JSON.parse(localStorage.getItem("mc_booked") || "[]"); } catch(e){}
+  return new Set([...BOOKED_DATES, ...local]);
+}
+function rememberLocal(d){
+  try {
+    const a = JSON.parse(localStorage.getItem("mc_booked") || "[]");
+    if (!a.includes(d)){ a.push(d); localStorage.setItem("mc_booked", JSON.stringify(a)); }
+  } catch(e){}
+}
+function isoDate(d){ return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+function fmtDate(d){ return new Date(d+"T00:00:00").toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short",year:"numeric"}); }
+
+const calBox = document.getElementById("calBox");
+const dateBtn = document.getElementById("fDateBtn");
+const dateLabel = document.getElementById("fDateLabel");
+let selDate = "";
+const preDate = params.get("date");
+if (preDate && !bookedSet().has(preDate) && preDate >= isoDate(new Date())) selDate = preDate;
+
+function syncDateBtn(){
+  if (selDate){ dateLabel.textContent = fmtDate(selDate); dateLabel.style.color = "#fff"; }
+  else { dateLabel.textContent = "Select a date"; dateLabel.style.color = "rgba(255,255,255,.4)"; }
+}
+function makeCalendar(container, onPick){
+  let cur = new Date(); cur = new Date(cur.getFullYear(), cur.getMonth(), 1);
+  const PREV = '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>';
+  const NEXT = '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>';
+  function render(){
+    const booked = bookedSet();
+    const today = new Date(); today.setHours(0,0,0,0);
+    const canPrev = cur > new Date(today.getFullYear(), today.getMonth(), 1);
+    const off = (cur.getDay()+6)%7;
+    const days = new Date(cur.getFullYear(), cur.getMonth()+1, 0).getDate();
+    let html = `<div class="cal-head"><button type="button" class="cal-nav" data-nav="-1" ${canPrev?"":"disabled"} aria-label="Previous month">${PREV}</button><span class="cal-title">${MONTH_NAMES[cur.getMonth()]} ${cur.getFullYear()}</span><button type="button" class="cal-nav" data-nav="1" aria-label="Next month">${NEXT}</button></div><div class="cal-grid">`;
+    ["Mo","Tu","We","Th","Fr","Sa","Su"].forEach(d=>html+=`<span class="cal-dow">${d}</span>`);
+    for(let i=0;i<off;i++) html+="<span></span>";
+    for(let d=1;d<=days;d++){
+      const date=new Date(cur.getFullYear(),cur.getMonth(),d);
+      const k=isoDate(date);
+      const isPast=date<today, isBooked=booked.has(k), sel=selDate===k;
+      const cls=["cal-day"]; if(isPast)cls.push("past"); if(isBooked)cls.push("booked"); if(sel)cls.push("selected");
+      html+=`<button type="button" class="${cls.join(" ")}" data-date="${k}" ${(isPast||isBooked)?"disabled":""} aria-label="${isBooked?k+' — already booked':k}">${d}</button>`;
+    }
+    html+=`</div><div class="cal-legend"><span><i class="dot"></i>Available</span><span><span class="bx">15</span> Booked</span></div>`;
+    container.innerHTML=html;
+    container.querySelectorAll("[data-nav]").forEach(b=>b.onclick=()=>{cur=new Date(cur.getFullYear(),cur.getMonth()+Number(b.dataset.nav),1);render();});
+    container.querySelectorAll(".cal-day:not(:disabled)").forEach(b=>b.onclick=()=>onPick(b.dataset.date));
+  }
+  render();
+  return { render };
+}
+const cal = makeCalendar(calBox, d => { selDate = d; syncDateBtn(); calBox.hidden = true; dateBtn.setAttribute("aria-expanded","false"); cal.render(); });
+syncDateBtn();
+dateBtn.addEventListener("click", () => { const willOpen = calBox.hidden; calBox.hidden = !willOpen; dateBtn.setAttribute("aria-expanded", String(willOpen)); });
+document.addEventListener("click", e => { if(!calBox.hidden && !calBox.contains(e.target) && !dateBtn.contains(e.target)){ calBox.hidden = true; dateBtn.setAttribute("aria-expanded","false"); } });
+
+// Terms modal
+const termsOv = document.getElementById("termsOverlay");
+function openTerms(e){ if(e) e.preventDefault(); termsOv.classList.add("open"); document.body.style.overflow = "hidden"; }
+function closeTerms(){ termsOv.classList.remove("open"); document.body.style.overflow = ""; }
+termsOv.addEventListener("click", e => { if (e.target === termsOv) closeTerms(); });
+addEventListener("keydown", e => { if (e.key === "Escape") closeTerms(); });
+
+// Submit → email + WhatsApp + Stripe deposit
+const bookForm = document.getElementById("bookForm");
+bookForm.addEventListener("submit", async e => {
+  e.preventDefault();
+  const err = document.getElementById("bkError");
+  err.style.display = "none";
+  if (!bookForm.checkValidity()){
+    const bad = bookForm.querySelector(":invalid");
+    err.textContent = document.getElementById("fTerms").checked
+      ? "Please complete all required fields highlighted above."
+      : "Please complete all required fields and accept the Terms & Conditions.";
+    err.style.display = "block";
+    if (bad) bad.focus();
+    return;
+  }
+  if (!selDate){
+    err.textContent = "Please choose a preferred date.";
+    err.style.display = "block";
+    calBox.hidden = false; dateBtn.setAttribute("aria-expanded","true"); dateBtn.focus();
+    return;
+  }
+  const v = id => document.getElementById(id).value.trim();
+  const date = selDate, first = v("fFirst");
+  if (bookedSet().has(date)){
+    err.textContent = "Sorry, that date is already booked. Please choose another date.";
+    err.style.display = "block"; calBox.hidden = false; return;
+  }
+  const summary = [
+    "New booking request — MyCharters",
+    `Name: ${first} ${v("fSur")}`,
+    `Phone: ${v("fPhone")}`,
+    `Address: ${v("fAddr")}`,
+    `Preferred date: ${date}`,
+    `Charter: ${v("fExp")}`,
+    `Guests: ${v("fGuests")}`,
+    `Food: ${v("fFood")}`,
+    `Allergies / dietary: ${v("fAllergy") || "None declared"}`,
+    "Deposit: €100 via Stripe",
+    "Terms & Conditions: accepted"
+  ].join("\n");
+
+  const btn = document.getElementById("bookBtn");
+  btn.disabled = true; btn.textContent = "Sending…";
+
+  // 1) Email — Web3Forms if configured (silent), else a mailto button in the success panel
+  let emailBtn = "";
+  if (WEB3FORMS_KEY !== "YOUR_WEB3FORMS_ACCESS_KEY"){
+    try {
+      await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify({ access_key: WEB3FORMS_KEY, subject: `Booking request — ${first} ${v("fSur")} (${date})`, from_name: "MyCharters Website", message: summary })
+      });
+    } catch (e2) { /* WhatsApp + mailto fallback still cover it */ }
+  } else {
+    const mailto = `mailto:${EMAIL}?subject=${encodeURIComponent("Booking request — " + first + " " + v("fSur"))}&body=${encodeURIComponent(summary)}`;
+    emailBtn = `<a class="btn btn-ghost" href="${mailto}">Email the details too</a>`;
+  }
+
+  // 2) WhatsApp — open a pre-filled message to the business
+  window.open(`https://wa.me/${WA_NUM}?text=${encodeURIComponent(summary)}`, "_blank", "noopener");
+
+  // 3) Stripe deposit + success state
+  const safeName = first.replace(/[<>&"]/g, "");
+  document.getElementById("bookCard").innerHTML = `
+    <div class="bk-success">
+      <div class="bk-badge"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+      <h3>Grazzi, ${safeName}! One last step.</h3>
+      <p>Your request is on its way to our crew and WhatsApp should be open with your details. Secure your date now with the €100 deposit.</p>
+      <a class="btn btn-coral" href="${STRIPE_LINK}" target="_blank" rel="noopener" onclick="rememberLocal('${date}')">Pay €100 Deposit — Stripe</a>
+      ${emailBtn}
+      <p class="form-note">Your booking is confirmed once the deposit is received.<br>Free cancellation up to 24h before departure.</p>
+    </div>`;
+});
+</script>
+</body>
+</html>
