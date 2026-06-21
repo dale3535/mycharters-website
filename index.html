@@ -682,12 +682,12 @@ safetyList.innerHTML = safety.map(li).join("");
 
 // Experiences
 const experiences = [
-  {t:"Harbour Cruise",d:"Grand Harbour · Valletta",img:"photo-1519046904884-53103b34b206",desc:"A relaxed cruise around the Grand Harbour and Valletta's floodlit bastions — the perfect short escape on the water, beautiful by day or as the sun drops behind the limestone.",h:["Valletta & the Three Cities by water","An easy first taste of the coast","Daytime or golden-hour departures"]},
-  {t:"Half Day",d:"4 hours",img:"photo-1505142468610-359e7d316be0",desc:"Four hours to slip out to the Blue Lagoon or Comino, drop anchor over white sand and swim straight off the boat before the crowds build — drinks chilled, music yours.",h:["Blue Lagoon or Comino","Swimming & snorkelling stops","Beat the midday crowds"]},
-  {t:"Day Charter",d:"Full day · 8 hours",img:"photo-1468413253725-0d5181091126",desc:"A full eight hours on the water, entirely yours — Comino, Gozo's coastline and every swim stop in between, at your own pace with no schedule but your own.",h:["Comino + Gozo + swim stops","Fully flexible itinerary","The day is entirely yours"]},
-  {t:"Comino Day",d:"Comino · Blue Lagoon",img:"photo-1544551763-46a013bb70d5",desc:"A day dedicated to Comino — the famous Blue Lagoon, the quieter Crystal Lagoon, sea caves you can swim into and Santa Marija Bay.",h:["Blue Lagoon & Crystal Lagoon","Sea cave exploration","Snorkelling gear on board"]},
-  {t:"Sunset Cruise",d:"Evening · golden hour",img:"photo-1559827260-dc66d52bef19",desc:"Golden hour from the water is a different Malta. Glide past Valletta's bastions as the limestone turns amber, then watch the sun drop into the Mediterranean with a glass in hand.",h:["Valletta by golden light","Perfect for couples & proposals","Complimentary prosecco"]},
-  {t:"Custom",d:"Tailored to you",img:"photo-1454391304352-2bf4678b1a7a",desc:"Proposals, birthdays, anniversaries, team days, photo shoots — tell us the occasion and we'll design the day around it, from route to refreshments to the playlist.",h:["Proposals & celebrations","Corporate & team experiences","Bespoke routes & extras"]},
+  {t:"Harbour Cruise",d:"Grand Harbour · Valletta",price:"From €400",img:"photo-1519046904884-53103b34b206",desc:"A relaxed cruise around the Grand Harbour and Valletta's floodlit bastions — the perfect short escape on the water, beautiful by day or as the sun drops behind the limestone.",h:["Valletta & the Three Cities by water","An easy first taste of the coast","Daytime or golden-hour departures"]},
+  {t:"Half Day",d:"4 hours",price:"From €450",img:"photo-1505142468610-359e7d316be0",desc:"Four hours to slip out to the Blue Lagoon or Comino, drop anchor over white sand and swim straight off the boat before the crowds build — drinks chilled, music yours.",h:["Blue Lagoon or Comino","Swimming & snorkelling stops","Beat the midday crowds"]},
+  {t:"Day Charter",d:"Full day · 8 hours",price:"From €850",img:"photo-1468413253725-0d5181091126",desc:"A full eight hours on the water, entirely yours — Comino, Gozo's coastline and every swim stop in between, at your own pace with no schedule but your own.",h:["Comino + Gozo + swim stops","Fully flexible itinerary","The day is entirely yours"]},
+  {t:"Comino Day",d:"Comino · Blue Lagoon",price:"From €850",img:"photo-1544551763-46a013bb70d5",desc:"A day dedicated to Comino — the famous Blue Lagoon, the quieter Crystal Lagoon, sea caves you can swim into and Santa Marija Bay.",h:["Blue Lagoon & Crystal Lagoon","Sea cave exploration","Snorkelling gear on board"]},
+  {t:"Sunset Cruise",d:"Evening · golden hour",price:"From €400",img:"photo-1559827260-dc66d52bef19",desc:"Golden hour from the water is a different Malta. Glide past Valletta's bastions as the limestone turns amber, then watch the sun drop into the Mediterranean with a glass in hand.",h:["Valletta by golden light","Perfect for couples & proposals","Complimentary prosecco"]},
+  {t:"Gift Card",d:"The perfect gift",price:"Any amount",img:"photo-1454391304352-2bf4678b1a7a",desc:"Give the gift of a day at sea. A MyCharters gift card lets someone special choose their own charter — redeemable against any experience, for any occasion.",h:["Redeemable on any charter","Choose your own amount","Delivered by email or printed"]},
 ];
 expGrid.innerHTML = experiences.map((e,i) => `
   <article class="card reveal" data-delay="${i % 3}">
@@ -696,7 +696,7 @@ expGrid.innerHTML = experiences.map((e,i) => `
       <h3>${e.t}</h3>
       <p class="desc">${e.desc}</p>
       <ul>${e.h.map(x=>`<li>${check}<span>${x}</span></li>`).join("")}</ul>
-      <div class="foot"><span class="price">Price on request</span>
+      <div class="foot"><span class="price">${e.price}</span>
         <a class="enquire" href="booking.html?charter=${encodeURIComponent(e.t)}">Enquire <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
     </div>
