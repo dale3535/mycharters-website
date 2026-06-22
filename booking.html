@@ -337,6 +337,21 @@ syncDateBtn();
 dateBtn.addEventListener("click", () => { const willOpen = calBox.hidden; calBox.hidden = !willOpen; dateBtn.setAttribute("aria-expanded", String(willOpen)); });
 document.addEventListener("click", e => { if(!calBox.hidden && !calBox.contains(e.target) && !dateBtn.contains(e.target)){ calBox.hidden = true; dateBtn.setAttribute("aria-expanded","false"); } });
 
+// After a SUCCESSFUL Stripe payment, Stripe redirects back here (?paid=1 / ?session_id=…).
+// Only then do we cross the date out. Clicking "Pay deposit" merely stored it as pending.
+const _ret = new URLSearchParams(location.search);
+if (_ret.get("session_id") || _ret.get("paid")) {
+  const paidDate = localStorage.getItem("mc_pending_date");
+  if (paidDate) { rememberLocal(paidDate); localStorage.removeItem("mc_pending_date"); cal.render(); }
+  document.getElementById("bookCard").innerHTML = `
+    <div class="bk-success">
+      <div class="bk-badge"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+      <h3>Deposit received — grazzi!</h3>
+      <p>Your €100 deposit is in${paidDate ? ` and your date (${fmtDate(paidDate)}) is now secured` : ""}. We'll confirm the details with you on WhatsApp shortly. See you on the water!</p>
+      <a class="btn btn-coral" href="index.html">Back to home</a>
+    </div>`;
+}
+
 // Terms modal
 const termsOv = document.getElementById("termsOverlay");
 function openTerms(e){ if(e) e.preventDefault(); termsOv.classList.add("open"); document.body.style.overflow = "hidden"; }
@@ -427,7 +442,7 @@ bookForm.addEventListener("submit", async e => {
       <h3>Grazzi, ${safeName}! Just two quick steps.</h3>
       <p>Tap below to send us your booking details on WhatsApp, then secure your date with the €100 deposit.</p>
       ${sendBtns}
-      <a class="btn btn-coral" href="${STRIPE_LINK}" target="_blank" rel="noopener" onclick="rememberLocal('${date}')">Step 3 · Pay €100 deposit</a>
+      <a class="btn btn-coral" href="${STRIPE_LINK}" target="_blank" rel="noopener" onclick="localStorage.setItem('mc_pending_date','${date}')">Step 3 · Pay €100 deposit</a>
       <p class="form-note">Your booking is confirmed once the deposit is received.<br>Free cancellation up to 24h before departure.</p>
     </div>`;
 });
