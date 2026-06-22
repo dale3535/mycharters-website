@@ -70,7 +70,10 @@ main{flex:1;padding-bottom:40px}
 .field input,.field select,.field textarea{width:100%;border-radius:var(--r-sm);border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);padding:14px 16px;font-size:14px;color:#fff;font-family:'Inter';color-scheme:dark;transition:border-color .3s,box-shadow .3s}
 .field input::placeholder,.field textarea::placeholder{color:rgba(255,255,255,.38)}
 .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--coral);box-shadow:0 0 0 3px rgba(244,119,92,.20)}
-.field select option{color:var(--navy)}
+.field select{appearance:none;-webkit-appearance:none;-moz-appearance:none;cursor:pointer;padding-right:44px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23F4775C' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;background-size:16px}
+.field select:hover{border-color:rgba(255,255,255,.34)}
+.field select option{background:#0e2438;color:#fff}
+.field select option:disabled{color:rgba(255,255,255,.4)}
 .span2{grid-column:1/-1}
 .check-row{display:flex;align-items:flex-start;gap:12px}
 .check-row input{width:20px;height:20px;margin-top:1px;flex-shrink:0;accent-color:var(--coral);cursor:pointer}
@@ -188,16 +191,19 @@ footer a:hover{color:var(--coral)}
         <div class="field"><label for="fExp">Charter type <span class="req">*</span></label>
           <select id="fExp" required>
             <option value="" disabled selected>Select a charter</option>
-            <option>Harbour Cruise</option><option>Half Day</option>
-            <option>Day Charter</option><option>Comino Day</option>
-            <option>Sunset Cruise</option><option>Gift Card</option>
+            <option value="Harbour Cruise">Harbour Cruise — from €400</option>
+            <option value="Half Day">Half Day — from €450</option>
+            <option value="Day Charter">Day Charter — from €850</option>
+            <option value="Comino Day">Comino Day — from €850</option>
+            <option value="Sunset Cruise">Sunset Cruise — from €400</option>
+            <option value="Gift Card">Gift Card — any amount</option>
           </select>
         </div>
         <div class="field"><label for="fGuests">Number of people boarding <span class="req">*</span></label><input id="fGuests" type="number" min="1" max="10" required placeholder="e.g. 4"></div>
         <div class="field"><label for="fFood">Food choice (platter included) <span class="req">*</span></label>
           <select id="fFood" required>
             <option value="" disabled selected>Select a package</option>
-            <option>High-End Package (platter included)</option>
+            <option>High-End Package (platter included) · +€50</option>
             <option>Basic Package (platter included)</option>
           </select>
         </div>
