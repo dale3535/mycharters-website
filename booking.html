@@ -392,8 +392,12 @@ bookForm.addEventListener("submit", async e => {
       });
     } catch (e2) { /* the WhatsApp step below still delivers it */ }
   }
-  // "Step 2" button — opens WhatsApp pre-filled with the full booking, sent to MyCharters
-  const sendBtn = `<a class="btn" style="background:#25D366;color:#fff" href="https://wa.me/35679361991?text=${encodeURIComponent(summary)}" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5 14.2c-.2.6-1.2 1.2-1.7 1.2-.4.1-1 .1-1.6-.1a14 14 0 0 1-1.5-.5c-2.6-1.1-4.3-3.7-4.4-3.9-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.4l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1.1 2.2 1.4 2.5 1.5.3.1.5.1.7-.1l1-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.3 0 .2 0 .7-.2 1.1z"/></svg>Step 2 · Send us your booking details</a>`;
+  // "Step 2" — open WhatsApp pre-filled with the full booking. A wa.me link opens one
+  // chat per tap, so we show a Send button for each MyCharters number.
+  const waText = encodeURIComponent(summary);
+  const waIcon = '<svg class="ico" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5 14.2c-.2.6-1.2 1.2-1.7 1.2-.4.1-1 .1-1.6-.1a14 14 0 0 1-1.5-.5c-2.6-1.1-4.3-3.7-4.4-3.9-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.4l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1.1 2.2 1.4 2.5 1.5.3.1.5.1.7-.1l1-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.3 0 .2 0 .7-.2 1.1z"/></svg>';
+  const waBtn = (num, label) => `<a class="btn" style="background:#25D366;color:#fff" href="https://wa.me/${num}?text=${waText}" target="_blank" rel="noopener">${waIcon}Send to ${label}</a>`;
+  const sendBtns = `<p class="form-note" style="font-size:13px;color:rgba(255,255,255,.82);margin-bottom:-2px">Step 2 · Send us your booking details on WhatsApp</p>${waBtn("35679361991", "+356 7936 1991")}${waBtn("35677019333", "+356 7701 9333")}`;
 
   // Auto-send the booking to staff WhatsApp via the serverless function (/api/booking).
   // Works once deployed on Vercel with the Twilio env vars set; on the static-only
@@ -416,7 +420,7 @@ bookForm.addEventListener("submit", async e => {
       <div class="bk-badge"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
       <h3>Grazzi, ${safeName}! Just two quick steps.</h3>
       <p>Tap below to send us your booking details on WhatsApp, then secure your date with the €100 deposit.</p>
-      ${sendBtn}
+      ${sendBtns}
       <a class="btn btn-coral" href="${STRIPE_LINK}" target="_blank" rel="noopener" onclick="rememberLocal('${date}')">Step 3 · Pay €100 deposit</a>
       <p class="form-note">Your booking is confirmed once the deposit is received.<br>Free cancellation up to 24h before departure.</p>
     </div>`;
