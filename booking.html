@@ -209,7 +209,7 @@ footer a:hover{color:var(--coral)}
         <div class="span2"><p class="bk-error" id="bkError" role="alert" aria-live="assertive"></p></div>
         <div class="span2">
           <button type="submit" class="btn btn-coral" style="width:100%" id="bookBtn">Request Booking &amp; Pay €100 Deposit</button>
-          <p class="form-note">On submit we email your request, open WhatsApp with your details, then take you to the secure €100 Stripe deposit.</p>
+          <p class="form-note">On submit we email your request to our crew, then take you to the secure €100 Stripe deposit.</p>
         </div>
       </form>
     </div>
@@ -397,16 +397,13 @@ bookForm.addEventListener("submit", async e => {
     emailBtn = `<a class="btn btn-ghost" href="${mailto}">Email the details too</a>`;
   }
 
-  // 2) WhatsApp — open a pre-filled message to the business
-  window.open(`https://wa.me/${WA_NUM}?text=${encodeURIComponent(summary)}`, "_blank", "noopener");
-
-  // 3) Stripe deposit + success state
+  // Stripe deposit + success state
   const safeName = first.replace(/[<>&"]/g, "");
   document.getElementById("bookCard").innerHTML = `
     <div class="bk-success">
       <div class="bk-badge"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
       <h3>Grazzi, ${safeName}! One last step.</h3>
-      <p>Your request is on its way to our crew and WhatsApp should be open with your details. Secure your date now with the €100 deposit.</p>
+      <p>Your request is on its way to our crew. Secure your date now with the €100 deposit to confirm your booking.</p>
       <a class="btn btn-coral" href="${STRIPE_LINK}" target="_blank" rel="noopener" onclick="rememberLocal('${date}')">Pay €100 Deposit — Stripe</a>
       ${emailBtn}
       <p class="form-note">Your booking is confirmed once the deposit is received.<br>Free cancellation up to 24h before departure.</p>
