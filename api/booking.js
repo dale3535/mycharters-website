@@ -9,7 +9,7 @@
 // Staff numbers that receive the booking:
 const STAFF_NUMBERS = ["+35679361991", "+35677019333"];
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   // Allow the form to call this from any origin (e.g. the GitHub Pages copy too)
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
