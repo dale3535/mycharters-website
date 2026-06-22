@@ -265,7 +265,14 @@ const WA_NUM = "35679361991";
 const EMAIL = "mychartersinfo@gmail.com";
 const WEB3FORMS_KEY = "YOUR_WEB3FORMS_ACCESS_KEY";
 const STRIPE_LINK = "https://buy.stripe.com/14A28saRS8B08MjfooaEE00";
-const BOOKED_DATES = ["2026-06-15","2026-06-19","2026-06-27","2026-07-04"];
+// ===== BOOKED DATES — block a date for EVERYONE =====
+// Add a line in "YYYY-MM-DD" form to cross a date out for every visitor.
+// Delete a line to free that date up again. (Past dates are auto-disabled.)
+const BOOKED_DATES = [
+  "2026-06-27",
+  "2026-07-04",
+  // "2026-08-15",   ← example: copy this line, change the date, remove the //
+];
 
 document.getElementById("year").textContent = new Date().getFullYear();
 
