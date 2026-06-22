@@ -397,6 +397,20 @@ bookForm.addEventListener("submit", async e => {
     emailBtn = `<a class="btn btn-ghost" href="${mailto}">Email the details too</a>`;
   }
 
+  // Auto-send the booking to staff WhatsApp via the serverless function (/api/booking).
+  // Works once deployed on Vercel with the Twilio env vars set; on the static-only
+  // host this just no-ops and the email path above covers it.
+  try {
+    await fetch("/api/booking", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: first, surname: v("fSur"), phone: v("fPhone"), address: v("fAddr"),
+        date, charter: v("fExp"), guests: v("fGuests"), food: v("fFood"), allergies: v("fAllergy")
+      })
+    });
+  } catch (e3) { /* backend not reachable yet — email fallback covers it */ }
+
   // Stripe deposit + success state
   const safeName = first.replace(/[<>&"]/g, "");
   document.getElementById("bookCard").innerHTML = `
