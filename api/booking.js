@@ -26,18 +26,21 @@ module.exports = async function handler(req, res) {
 
   const b = req.body || {};
   const clean = (s) => String(s == null ? "" : s).slice(0, 300);
+  const deposit = Number(b.deposit) > 0 ? Number(b.deposit) : 100;
   const text = [
     "🛥️ New booking — MyCharters",
+    b.boat ? `Boat: ${clean(b.boat)} · operator: ${clean(b.operator)}` : null,
+    b.marina ? `Marina: ${clean(b.marina)}` : null,
     `Name: ${clean(b.name)} ${clean(b.surname)}`,
     `Phone: ${clean(b.phone)}`,
     `Address: ${clean(b.address)}`,
     `Date: ${clean(b.date)}`,
     `Charter: ${clean(b.charter)}`,
     `Guests: ${clean(b.guests)}`,
-    `Food: ${clean(b.food)}`,
+    b.food ? `Extras: ${clean(b.food)}` : null,
     `Allergies: ${clean(b.allergies) || "None declared"}`,
-    "Deposit: €100 via Stripe",
-  ].join("\n");
+    `Deposit: €${deposit} via Stripe`,
+  ].filter(Boolean).join("\n");
 
   const auth = Buffer.from(`${SID}:${TOKEN}`).toString("base64");
   const url = `https://api.twilio.com/2010-04-01/Accounts/${SID}/Messages.json`;

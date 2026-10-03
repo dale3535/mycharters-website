@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://dale3535.github.io/mycharters-website/sitemap.xml
+Sitemap: https://mycharters-website.vercel.app/sitemap.xml
