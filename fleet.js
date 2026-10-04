@@ -13,7 +13,8 @@
 //                the page address ends with ?samples=1, never on the live
 //                site. Delete the sample boats once real ones are added.
 //    charters    the trips this boat offers, with the starting price in EUR.
-//                Use price: null for "Price on request" (or set priceLabel).
+//                All prices are currently null = "Price on request".
+//                Put a number (e.g. price: 450) to show "from €450" instead.
 //    extras      optional add-ons the customer picks when booking (leave [] for none).
 //    deposit     deposit in EUR taken through Stripe to secure the booking.
 //    depositLink a Stripe Payment Link for exactly that deposit amount.
@@ -53,11 +54,10 @@ const BOATS = [
       ["Engines", "Twin Yamaha 150 hp outboards"],
       ["Design", "Walkaround"],
     ],
-    // Operator's published "from" prices. Confirm the Saver's own rates.
     charters: [
-      { name: "Half Day", duration: "4 hours · 8:30am or 1:30pm", price: 375 },
-      { name: "Day Charter", duration: "Full day · 9am to 5pm", price: 580 },
-      { name: "Sunset Cruise", duration: "Evening", price: 300 },
+      { name: "Half Day", duration: "4 hours · 8:30am or 1:30pm", price: null },
+      { name: "Day Charter", duration: "Full day · 9am to 5pm", price: null },
+      { name: "Sunset Cruise", duration: "Evening", price: null },
     ],
     extras: [],
     includes: ["Licensed skipper", "Comfortable seating", "Sunbathing areas at bow & stern", "Cosy cabin", "Deck shower", "Onboard fridge", "Bluetooth sound system", "Swim platform", "Storage for your belongings"],
@@ -95,11 +95,10 @@ const BOATS = [
       ["Engines", "Twin Yamaha 150 hp outboards"], // TO CONFIRM: photos show one outboard
       ["Design", "Walkaround"],
     ],
-    // Operator's published "from" prices. Confirm the Eolo's own rates.
     charters: [
-      { name: "Half Day", duration: "4 hours · 8:30am or 1:30pm", price: 375 },
-      { name: "Day Charter", duration: "Full day · 9am to 5pm", price: 580 },
-      { name: "Sunset Cruise", duration: "Evening", price: 300 },
+      { name: "Half Day", duration: "4 hours · 8:30am or 1:30pm", price: null },
+      { name: "Day Charter", duration: "Full day · 9am to 5pm", price: null },
+      { name: "Sunset Cruise", duration: "Evening", price: null },
     ],
     extras: [],
     includes: ["Licensed skipper", "Comfortable seating", "Shaded bimini top", "Sunbathing areas", "Storage for your belongings"],
@@ -136,7 +135,6 @@ const BOATS = [
       ["Engines", "Twin Cummins 425 hp inboards"],
       ["Design", "Flybridge trawler yacht"],
     ],
-    // TO CONFIRM: no prices published for this yacht yet. price: null shows "Price on request".
     charters: [
       { name: "Half Day", duration: "4 hours · 8:30am or 1:30pm", price: null },
       { name: "Day Charter", duration: "Full day · 9am to 5pm", price: null },
@@ -175,11 +173,10 @@ const BOATS = [
       ["Top speed", "40 knots"],
       ["Design", "Center console"],
     ],
-    // Prices as listed on BoatBooker (2026). Confirm your own rates with Sea La Vie.
     charters: [
-      { name: "Sunset Cruise", duration: "3 hours · from 5:30pm", price: 400 },
-      { name: "Half Day", duration: "4 hours · 9:30am or 1:30pm", price: 460 },
-      { name: "Day Charter", duration: "8 hours · from 9am", price: 750 },
+      { name: "Sunset Cruise", duration: "3 hours · from 5:30pm", price: null },
+      { name: "Half Day", duration: "4 hours · 9:30am or 1:30pm", price: null },
+      { name: "Day Charter", duration: "8 hours · from 9am", price: null },
     ],
     extras: [],
     includes: ["Licensed skipper", "Bimini shade", "Bow sundeck", "Cabin", "Private toilet", "Refrigerator", "Premium sound system & WiFi", "Snorkelling gear available", "Life jackets for all guests", "GPS, chartplotter & VHF radio"],
@@ -213,11 +210,10 @@ const BOATS = [
       ["Top speed", "23 knots"],
       ["Season", "1 May to 30 October"],
     ],
-    // Prices as listed on BoatBooker (2026). Confirm your own rates with Prestige Charters.
     charters: [
-      { name: "Sunset Cruise", duration: "2 hours · harbour cruise from 5pm", price: 185 },
-      { name: "Half Day", duration: "4 hours · Comino & caves", price: 335 },
-      { name: "Comino Day", duration: "6 hours · Comino & caves, from 8am", price: 490 },
+      { name: "Sunset Cruise", duration: "2 hours · harbour cruise from 5pm", price: null },
+      { name: "Half Day", duration: "4 hours · Comino & caves", price: null },
+      { name: "Comino Day", duration: "6 hours · Comino & caves, from 8am", price: null },
     ],
     extras: [],
     includes: ["Skipper", "Bimini shade", "Bow sundeck", "Ice box", "Audio system with outside speakers", "Flexible pick-up", "Life jackets & VHF radio", "Snorkelling gear (optional extra)", "Alcohol allowed on board"],
@@ -247,16 +243,16 @@ const BOATS = [
       "https://images.unsplash.com/photo-1505142468610-359e7d316be0?q=80&w=1800&auto=format&fit=crop",
     ],
     charters: [
-      { name: "Harbour Cruise", duration: "2 hours", price: 400 },
-      { name: "Half Day", duration: "4 hours", price: 450 },
-      { name: "Day Charter", duration: "8 hours", price: 850 },
-      { name: "Comino Day", duration: "Full day", price: 850 },
-      { name: "Sunset Cruise", duration: "Evening", price: 400 },
+      { name: "Harbour Cruise", duration: "2 hours", price: null },
+      { name: "Half Day", duration: "4 hours", price: null },
+      { name: "Day Charter", duration: "8 hours", price: null },
+      { name: "Comino Day", duration: "Full day", price: null },
+      { name: "Sunset Cruise", duration: "Evening", price: null },
       { name: "Gift Card", duration: "Any charter", price: null, priceLabel: "Any amount" },
     ],
     extras: [
-      { name: "Basic food package (platter included)", price: 0 },
-      { name: "High-end food package (platter included)", price: 50 },
+      { name: "Basic food package (platter included)", price: null },
+      { name: "High-end food package (platter included)", price: null },
     ],
     includes: ["Licensed skipper", "Fuel", "Snorkelling gear", "Soft drinks & ice", "Bluetooth sound system", "Cabin, toilet & freshwater shower", "Life jackets incl. children's sizes"],
     deposit: 100,
@@ -271,83 +267,6 @@ const BOATS = [
       photo: "captain.jpg",
       bio: "With extensive experience on the water and a calm, professional approach, Lyon knows these coasts intimately, making sure every charter runs safely, smoothly and exactly the way you imagined.",
     },
-  },
-
-  // ---------------- SAMPLE LISTINGS (preview only) ----------------
-  {
-    id: "sample-motor-yacht",
-    published: true,
-    sample: true,
-    name: "12 m Motor Yacht",
-    type: "Motor yacht",
-    operator: "Partner operator",
-    marina: "Msida Yacht Marina",
-    length: "12 m",
-    guests: 12,
-    summary: "Sample listing. A flybridge motor yacht with a shaded cockpit, saloon and two cabins, for groups who want space and comfort.",
-    photos: [
-      "https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?q=80&w=1800&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1559827260-dc66d52bef19?q=80&w=1800&auto=format&fit=crop",
-    ],
-    charters: [
-      { name: "Half Day", duration: "4 hours", price: 750 },
-      { name: "Day Charter", duration: "8 hours", price: 1350 },
-      { name: "Sunset Cruise", duration: "Evening", price: 650 },
-    ],
-    extras: [],
-    includes: ["Licensed skipper", "Snorkelling gear", "Soft drinks & ice", "Two cabins & saloon"],
-    deposit: 100,
-    depositLink: DEFAULT_DEPOSIT_LINK,
-    bookedDates: [],
-  },
-  {
-    id: "sample-catamaran",
-    published: true,
-    sample: true,
-    name: "Sailing Catamaran",
-    type: "Catamaran",
-    operator: "Partner operator",
-    marina: "Mġarr Harbour, Gozo",
-    length: "13 m",
-    guests: 16,
-    summary: "Sample listing. A stable sailing catamaran with trampoline nets and a big sun deck, ideal for families and celebrations.",
-    photos: [
-      "https://images.unsplash.com/photo-1540946485063-a40da27545f8?q=80&w=1800&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1800&auto=format&fit=crop",
-    ],
-    charters: [
-      { name: "Half Day", duration: "4 hours", price: 900 },
-      { name: "Comino Day", duration: "Full day", price: 1500 },
-    ],
-    extras: [],
-    includes: ["Licensed skipper", "Snorkelling gear", "Paddleboard", "Water & soft drinks"],
-    deposit: 100,
-    depositLink: DEFAULT_DEPOSIT_LINK,
-    bookedDates: [],
-  },
-  {
-    id: "sample-day-boat",
-    published: true,
-    sample: true,
-    name: "7 m Day Boat",
-    type: "Speedboat",
-    operator: "Partner operator",
-    marina: "Ċirkewwa",
-    length: "7 m",
-    guests: 6,
-    summary: "Sample listing. A nimble open day boat for small groups, short hops to the Blue Lagoon and quick swim stops.",
-    photos: [
-      "https://images.unsplash.com/photo-1635776033909-ffa6a9b19ab6?q=80&w=1800&auto=format&fit=crop",
-    ],
-    charters: [
-      { name: "Harbour Cruise", duration: "2 hours", price: 250 },
-      { name: "Half Day", duration: "4 hours", price: 320 },
-    ],
-    extras: [],
-    includes: ["Licensed skipper", "Fuel", "Snorkelling gear"],
-    deposit: 100,
-    depositLink: DEFAULT_DEPOSIT_LINK,
-    bookedDates: [],
   },
 ];
 

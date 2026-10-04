@@ -34,7 +34,7 @@
     <div class="page-head">
       <p class="eyebrow">The Fleet</p>
       <h1>Find your boat,<br><em>pick your day.</em></h1>
-      <p>Every boat is privately chartered with a licensed skipper. Compare what's included, check the dates, then secure it with a €100 deposit.</p>
+      <p>Every boat is privately chartered with a licensed skipper. Compare what's included, check the dates, then request your booking. Prices on request.</p>
       <div class="gold-divider"></div>
     </div>
 
@@ -52,13 +52,6 @@
       </div>
       <div><label for="fType">Boat type</label><select id="fType"><option value="">All types</option></select></div>
       <div><label for="fTrip">Trip</label><select id="fTrip"><option value="">Any trip</option></select></div>
-      <div><label for="fPrice">Starting price</label>
-        <select id="fPrice">
-          <option value="0">Any price</option>
-          <option value="500">Under €500</option>
-          <option value="1000">Under €1,000</option>
-        </select>
-      </div>
     </form>
 
     <p class="result-count" id="count" aria-live="polite"></p>
@@ -125,12 +118,11 @@ function card(b) {
 }
 
 function render() {
-  const guests = Number($("fGuests").value), type = $("fType").value, trip = $("fTrip").value, max = Number($("fPrice").value);
+  const guests = Number($("fGuests").value), type = $("fType").value, trip = $("fTrip").value;
   const list = MC.boats.filter((b) =>
     b.guests >= guests &&
     (!type || b.type === type) &&
-    (!trip || b.charters.some((c) => c.name === trip)) &&
-    (!max || (MC.fromPrice(b) != null && MC.fromPrice(b) < max))
+    (!trip || b.charters.some((c) => c.name === trip))
   );
   $("grid").innerHTML = list.map(card).join("");
   $("empty").hidden = list.length > 0;

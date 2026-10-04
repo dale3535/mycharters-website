@@ -472,7 +472,7 @@ footer{padding:64px 0 40px;border-top:1px solid rgba(255,255,255,.1);background:
       <div class="gold-divider"></div>
     </div>
     <div class="steps">
-      <div class="step reveal"><h3>Browse the fleet</h3><p>Compare private boats by group size, trip and price. Every listing shows what's included, the departure marina and which dates are already taken.</p></div>
+      <div class="step reveal"><h3>Browse the fleet</h3><p>Compare private boats by group size, boat type and trip. Every listing shows what's included, the departure marina and which dates are already taken.</p></div>
       <div class="step reveal" data-delay="1"><h3>Pick your boat &amp; day</h3><p>Choose your trip and date, tell us who's coming and any dietary needs, then hold the date with a €100 deposit through Stripe.</p></div>
       <div class="step reveal" data-delay="2"><h3>Confirm &amp; set sail</h3><p>The operator confirms your booking and we send you the meeting point. If the boat can't take you, we offer another or refund your deposit in full.</p></div>
     </div>
@@ -562,7 +562,7 @@ footer{padding:64px 0 40px;border-top:1px solid rgba(255,255,255,.1);background:
         </div>
       </div>
       <ul class="partner-list">
-        <li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Your own listing page with photos, trips, prices and an availability calendar</li>
+        <li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Your own listing page with photos, trips, specs and an availability calendar</li>
         <li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Bookings come to you with the guest's details, group size and dietary needs</li>
         <li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Deposit collected up front, so fewer no-shows</li>
         <li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>You keep running your boat your way. We handle the guests' questions before the day</li>
@@ -728,7 +728,7 @@ const icons = {
 };
 const why = [
   ["Operators We Know","We only list licensed, insured operators we've worked alongside on the water. No anonymous listings, no surprises on the day.","shield"],
-  ["Compare in One Place","RIBs, motor yachts and catamarans side by side, with prices, capacity and what's included laid out plainly.","compass"],
+  ["Compare in One Place","RIBs, motor yachts and catamarans side by side, with capacity, specs and what's included laid out plainly.","compass"],
   ["One Point of Contact","Ask us anything before you book and after. We pass your plans to the operator so you never have to explain twice.","anchor"],
   ["Genuinely Private","Every charter is your group only. No strangers, no fixed seats, and a route that bends to your day.","route"],
   ["The Right Boat for the Day","Big group, small budget, rough forecast, a birthday on board: we know which boat suits which day.","star"],
@@ -739,6 +739,7 @@ whyGrid.innerHTML = why.map(([t,d,ic],i) => `<div class="why-card reveal" data-d
 // FAQ
 const faqs = [
   ["Who actually runs the boat?","Each boat is operated by an independent, licensed local operator, named on the boat's page. MyCharters arranges your booking and stays your point of contact; the operator's skipper and crew take care of you on the water."],
+  ["How much does a charter cost?","Prices depend on the boat, the trip, the date and your group, so every charter is priced on request. Send us a booking request or message us on WhatsApp and we'll come back with a price."],
   ["How do I book and pay?","Choose a boat on the fleet page, pick your trip and date, and pay a €100 deposit through Stripe to hold it. The operator confirms the date and the balance is settled as agreed with them, normally on the day."],
   ["What if the boat I chose isn't available?","Partner boats have their own calendars, so occasionally a date has just gone. If that happens we'll offer you a similar boat, or refund your deposit in full. Your choice."],
   ["Where do charters depart from?","It depends on the boat. Our partner boats are spread across Malta and Gozo, and each listing shows where it departs. We'll send you a pin and meeting instructions once your booking is confirmed."],
