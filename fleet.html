@@ -101,7 +101,7 @@ function card(b) {
   const href = `boat.html?boat=${encodeURIComponent(b.id)}`;
   return `<article class="bcard glass">
     <a class="img" href="${href}" aria-label="${esc(b.name)}">
-      <img src="${esc(b.photos[0])}" alt="${esc(b.name)}" loading="lazy">
+      <img src="${esc(MC.cover(b))}" alt="${esc(b.name)}" loading="lazy">
       <span class="chip">${esc(b.type)}</span>
       ${b.sample ? '<span class="sample-badge">Sample listing</span>' : ""}
     </a>

@@ -20,6 +20,7 @@
 //    bookedDates dates already taken, one "YYYY-MM-DD" per line. They show
 //                crossed out and can't be picked.
 //    skipper     optional { name, photo, bio } shown on the boat's page.
+//    photos      list of image paths. Leave [] for a 'Photos coming soon' tile.
 //    specs       optional list of ["Label", "Value"] pairs shown as a spec table.
 // =====================================================================
 
@@ -143,6 +144,45 @@ const BOATS = [
     ],
     extras: [],
     includes: ["Skipper & deckhand", "Flybridge with panoramic views", "Comfortable seating", "Large sunbathing areas", "Storage for your belongings"],
+    deposit: 100,
+    depositLink: DEFAULT_DEPOSIT_LINK,
+    bookedDates: [
+      // "2026-08-15",   ← example: copy this line, change the date, remove the //
+    ],
+  },
+
+  {
+    id: "saver-870-wa",
+    published: true,
+    sample: false,
+    name: "Saver 870 WA",
+    type: "Center console",
+    operator: "Sea La Vie Boat Charters",
+    marina: "Msida Marina",
+    length: "30 ft",
+    guests: 9,
+    summary: "A brand-new 2026 Saver 870 WA for up to 9 guests, with twin 200 hp Yamahas and a top speed of 40 knots for fast island hopping. Bow sundeck, bimini shade, cabin with private toilet, fridge, premium sound and WiFi. Skippered by Christian Mifsud, who knows every hidden bay around Comino and the Blue Lagoon.",
+    // No clean photos yet (the BoatBooker ones are watermarked). Ask Sea La Vie
+    // for originals, put them in images/boats/saver-870-wa/ and list them here.
+    photos: [],
+    specs: [
+      ["Model", "Saver 870 WA"],
+      ["Year", "2026"],
+      ["Length", "30 ft"],
+      ["Guests", "Up to 9"],
+      ["Crew", "1 skipper (Christian Mifsud)"],
+      ["Engines", "Twin Yamaha 200 hp outboards"],
+      ["Top speed", "40 knots"],
+      ["Design", "Center console"],
+    ],
+    // Prices as listed on BoatBooker (2026). Confirm your own rates with Sea La Vie.
+    charters: [
+      { name: "Sunset Cruise", duration: "3 hours · from 5:30pm", price: 400 },
+      { name: "Half Day", duration: "4 hours · 9:30am or 1:30pm", price: 460 },
+      { name: "Day Charter", duration: "8 hours · from 9am", price: 750 },
+    ],
+    extras: [],
+    includes: ["Licensed skipper", "Bimini shade", "Bow sundeck", "Cabin", "Private toilet", "Refrigerator", "Premium sound system & WiFi", "Snorkelling gear available", "Life jackets for all guests", "GPS, chartplotter & VHF radio"],
     deposit: 100,
     depositLink: DEFAULT_DEPOSIT_LINK,
     bookedDates: [
@@ -288,6 +328,21 @@ const BOATS = [
     return prices.length ? Math.min(...prices) : null;
   }
 
+  // Branded stand-in when a boat has no photos yet.
+  function placeholder(name) {
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0E3456"/><stop offset="1" stop-color="#08182a"/></linearGradient></defs>
+<rect width="1200" height="800" fill="url(#g)"/>
+<path d="M0 560 C200 520 400 600 600 560 S1000 520 1200 560 V800 H0Z" fill="#4D9FDB" opacity=".18"/>
+<path d="M0 620 C220 585 420 655 620 620 S1000 585 1200 620 V800 H0Z" fill="#4D9FDB" opacity=".14"/>
+<text x="600" y="380" text-anchor="middle" font-family="Georgia,serif" font-size="64" fill="#ffffff">${esc(name)}</text>
+<text x="600" y="450" text-anchor="middle" font-family="Arial,sans-serif" font-size="26" letter-spacing="8" fill="#F89C86">PHOTOS COMING SOON</text>
+</svg>`;
+    return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+  }
+
+  function cover(boat) { return (boat.photos && boat.photos[0]) || placeholder(boat.name); }
+
   function localKey(id) { return "mc_booked_" + id; }
 
   function bookedSet(boat) {
@@ -313,6 +368,7 @@ const BOATS = [
     get: (id) => visible.find((b) => b.id === id) || null,
     types: [...new Set(visible.map((b) => b.type))],
     fromPrice,
+    cover,
     bookedSet,
     rememberBooked,
     esc,

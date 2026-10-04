@@ -680,7 +680,7 @@ const featured = MC.boats.slice(0, 3);
 fleetGrid.innerHTML = featured.length ? featured.map((b, i) => {
   const href = `boat.html?boat=${encodeURIComponent(b.id)}`;
   return `<article class="card reveal" data-delay="${i % 3}">
-    <a class="img" href="${href}" aria-label="${MC.esc(b.name)}"><div style="background-image:url('${MC.esc(b.photos[0])}')"></div><span class="chip">${MC.esc(b.type)}</span>${b.sample ? '<span class="sample-badge">Sample listing</span>' : ""}</a>
+    <a class="img" href="${href}" aria-label="${MC.esc(b.name)}"><div style="background-image:url(&quot;${MC.esc(MC.cover(b))}&quot;)"></div><span class="chip">${MC.esc(b.type)}</span>${b.sample ? '<span class="sample-badge">Sample listing</span>' : ""}</a>
     <div class="body">
       <h3>${MC.esc(b.name)}</h3>
       <div class="fleet-meta"><span>Up to ${b.guests} guests</span><span>${MC.esc(b.length)}</span><span>${MC.esc(b.marina)}</span></div>

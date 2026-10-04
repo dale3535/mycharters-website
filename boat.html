@@ -62,7 +62,7 @@ if (!boat) {
     <div class="detail">
       <div>
         <div class="gallery-main">
-          <img id="mainImg" src="${esc(boat.photos[0])}" alt="${esc(boat.name)}">
+          <img id="mainImg" src="${esc(MC.cover(boat))}" alt="${esc(boat.name)}">
           ${boat.sample ? '<span class="sample-badge">Sample listing</span>' : ""}
         </div>
         ${boat.photos.length > 1 ? `<div class="thumbs" role="group" aria-label="Photos">${boat.photos.map((p, i) =>
