@@ -72,6 +72,12 @@ if (!boat) {
         <h1 class="d-title">${esc(boat.name)}</h1>
         <p class="d-sum">${esc(boat.summary)}</p>
 
+        ${boat.specs && boat.specs.length ? `<div class="panel glass">
+          <h2>Specifications</h2>
+          <ul class="price-list">${boat.specs.map(([k, v]) =>
+            `<li><span>${esc(k)}</span><span class="spec-v">${esc(v)}</span></li>`).join("")}</ul>
+        </div>` : ""}
+
         <div class="panel glass">
           <h2>Charters &amp; prices</h2>
           <ul class="price-list">${boat.charters.map((c) =>

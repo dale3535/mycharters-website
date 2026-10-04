@@ -19,14 +19,56 @@
 //    bookedDates dates already taken, one "YYYY-MM-DD" per line. They show
 //                crossed out and can't be picked.
 //    skipper     optional { name, photo, bio } shown on the boat's page.
+//    specs       optional list of ["Label", "Value"] pairs shown as a spec table.
 // =====================================================================
 
 const DEFAULT_DEPOSIT_LINK = "https://buy.stripe.com/14A28saRS8B08MjfooaEE00"; // €100 deposit
 
 const BOATS = [
   {
-    id: "capelli-tempest-900",
+    id: "saver-750-wa",
     published: true,
+    sample: false,
+    name: "Saver 750 WA",
+    type: "Walkaround",
+    operator: "Captain Nev's Charters",
+    marina: "Ta' Xbiex Marina",
+    length: "7.5 m",
+    guests: 8,
+    summary: "A stylish 2021 walkaround for up to 8 guests, with sunbathing areas at the bow and stern, a cosy cabin and a deck shower. Perfect for couples, friends, birthdays, anniversaries and unforgettable day trips.",
+    photos: [
+      "images/boats/saver-750-wa/marina.jpg",
+      "images/boats/saver-750-wa/blue-lagoon.jpg",
+      "images/boats/saver-750-wa/cabin.jpg",
+      "images/boats/saver-750-wa/night-berth.jpg",
+    ],
+    specs: [
+      ["Model", "Saver 750 WA"],
+      ["Year", "2021"],
+      ["Length", "7.5 m"],
+      ["Guests", "Up to 8"],
+      ["Crew", "1 skipper"],
+      ["Engines", "Twin Yamaha 150 hp outboards"],
+      ["Design", "Walkaround"],
+    ],
+    // Operator's published "from" prices. Confirm the Saver's own rates.
+    charters: [
+      { name: "Half Day", duration: "4 hours · 8:30am or 1:30pm", price: 375 },
+      { name: "Day Charter", duration: "Full day · 9am to 5pm", price: 580 },
+      { name: "Sunset Cruise", duration: "Evening", price: 300 },
+    ],
+    extras: [],
+    includes: ["Licensed skipper", "Comfortable seating", "Sunbathing areas at bow & stern", "Cosy cabin", "Deck shower", "Onboard fridge", "Bluetooth sound system", "Swim platform", "Storage for your belongings"],
+    deposit: 100,
+    depositLink: DEFAULT_DEPOSIT_LINK,
+    bookedDates: [
+      // "2026-08-15",   ← example: copy this line, change the date, remove the //
+    ],
+  },
+
+  {
+    id: "capelli-tempest-900",
+    published: false, // hidden: Saver is the first live boat. Set to true to show it again.
     sample: false,
     name: "Capelli Tempest 900",
     type: "RIB",

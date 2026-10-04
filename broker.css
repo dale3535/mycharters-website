@@ -119,6 +119,7 @@ header .row{display:flex;align-items:center;justify-content:space-between;gap:16
 .price-list li:last-child{border-bottom:none}
 .price-list small{display:block;color:rgba(234,242,249,.5);font-size:12px;margin-top:2px}
 .price-list b{font-family:'Cormorant Garamond',serif;font-size:21px;color:var(--coral-light);font-weight:600;white-space:nowrap}
+.price-list .spec-v{color:#fff;font-weight:500;text-align:right}
 .incl{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
 @media(max-width:520px){.incl{grid-template-columns:1fr}}
 .incl li{display:flex;gap:9px;font-size:14px;line-height:1.5;color:rgba(234,242,249,.82)}
