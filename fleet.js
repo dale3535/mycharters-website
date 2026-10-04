@@ -67,6 +67,48 @@ const BOATS = [
   },
 
   {
+    id: "eolo-650-wa",
+    published: true,
+    sample: false,
+    name: "Eolo 650 WA",
+    type: "Walkaround",
+    operator: "Captain Nev's Charters",
+    marina: "Ta' Xbiex Marina",
+    length: "7.5 m", // TO CONFIRM: a 650 is usually ~6.5 m
+    guests: 8,
+    summary: "A sporty 2019 walkaround for up to 8 guests, with comfortable shaded seating, sunbathing space and plenty of storage. Perfect for couples, friends, birthdays, anniversaries and unforgettable day trips around Comino and the coast.",
+    photos: [
+      "images/boats/eolo-650-wa/berth.jpg",
+      "images/boats/eolo-650-wa/comino-bow.jpg",
+      "images/boats/eolo-650-wa/seating.jpg",
+      "images/boats/eolo-650-wa/helm.jpg",
+      "images/boats/eolo-650-wa/night-marina.jpg",
+    ],
+    specs: [
+      ["Model", "Eolo 650 WA"],
+      ["Year", "2019"],
+      ["Length", "7.5 m"],
+      ["Guests", "Up to 8"],
+      ["Crew", "1 skipper"],
+      ["Engines", "Twin Yamaha 150 hp outboards"], // TO CONFIRM: photos show one outboard
+      ["Design", "Walkaround"],
+    ],
+    // Operator's published "from" prices. Confirm the Eolo's own rates.
+    charters: [
+      { name: "Half Day", duration: "4 hours · 8:30am or 1:30pm", price: 375 },
+      { name: "Day Charter", duration: "Full day · 9am to 5pm", price: 580 },
+      { name: "Sunset Cruise", duration: "Evening", price: 300 },
+    ],
+    extras: [],
+    includes: ["Licensed skipper", "Comfortable seating", "Shaded bimini top", "Sunbathing areas", "Storage for your belongings"],
+    deposit: 100,
+    depositLink: DEFAULT_DEPOSIT_LINK,
+    bookedDates: [
+      // "2026-08-15",   ← example: copy this line, change the date, remove the //
+    ],
+  },
+
+  {
     id: "capelli-tempest-900",
     published: false, // hidden: Saver is the first live boat. Set to true to show it again.
     sample: false,
