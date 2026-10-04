@@ -1,12 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://dale3535.github.io/mycharters-website/</loc>
+    <loc>https://mycharters-website.vercel.app/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://dale3535.github.io/mycharters-website/booking.html</loc>
+    <loc>https://mycharters-website.vercel.app/fleet</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mycharters-website.vercel.app/boat?boat=saver-750-wa</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mycharters-website.vercel.app/boat?boat=eolo-650-wa</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mycharters-website.vercel.app/boat?boat=beneteau-swift-trawler-50</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mycharters-website.vercel.app/boat?boat=saver-870-wa</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mycharters-website.vercel.app/boat?boat=bombard-explorer-600</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mycharters-website.vercel.app/booking</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

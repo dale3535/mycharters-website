@@ -4,7 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Book Your Charter | MyCharters Malta</title>
-<meta name="description" content="Request your private boat charter with MyCharters Malta. Secure your date with a €100 deposit — free cancellation up to 24 hours before departure.">
+<meta name="description" content="Book a private boat charter in Malta through MyCharters. Pick your boat and date, secure it with a €100 deposit, with free cancellation up to 24 hours before departure.">
+<link rel="canonical" href="https://mycharters-website.vercel.app/booking">
+<link rel="icon" type="image/png" href="mycharters-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -20,6 +22,7 @@
   --ease-out:cubic-bezier(.16,1,.3,1);
   --ease-spring:cubic-bezier(.34,1.56,.64,1);
   --r-lg:22px; --r-md:16px; --r-sm:12px;
+  --glass-brd:rgba(255,255,255,.14);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -81,6 +84,9 @@ main{flex:1;padding-bottom:40px}
 .check-row a{color:var(--coral-light);text-decoration:underline}
 .bk-error{display:none;color:#ffb4a0;font-size:13.5px;line-height:1.5;padding:12px 14px;border-radius:var(--r-sm);background:rgba(244,119,92,.12);border:1px solid rgba(244,119,92,.3)}
 .form-note{margin-top:12px;text-align:center;font-size:12px;color:rgba(255,255,255,.45)}
+.boat-hint{margin-top:8px;font-size:12.5px;line-height:1.5;color:rgba(255,255,255,.55)}
+.boat-hint a{color:var(--coral-light);text-decoration:underline}
+.boat-hint .tag{display:inline-block;margin-left:6px;font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#1a0d08;background:#FFD27A;border-radius:999px;padding:2px 8px}
 .bk-success{text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px;padding:8px 0}
 .bk-success h3{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:500}
 .bk-success p{font-size:14px;line-height:1.7;color:rgba(255,255,255,.72);max-width:440px}
@@ -171,12 +177,16 @@ footer a:hover{color:var(--coral)}
     <div class="intro">
       <p class="eyebrow">Book Your Charter</p>
       <h1>Two minutes to the<br><em>best day of your trip.</em></h1>
-      <p class="lede">Tell us who's coming and when. Your date is secured once the €100 deposit is received — free cancellation up to 24 hours before departure.</p>
+      <p class="lede">Choose your boat, your trip and your day. A €100 deposit holds the date while the boat's operator confirms. If the boat turns out to be unavailable, the deposit is refunded in full.</p>
       <div class="gold-divider"></div>
     </div>
 
     <div class="form-card glass-dark" id="bookCard">
       <form id="bookForm" class="bk-grid" novalidate>
+        <div class="field span2"><label for="fBoat">Boat <span class="req">*</span></label>
+          <select id="fBoat" required><option value="" disabled selected>Choose a boat</option></select>
+          <p class="boat-hint" id="boatHint"></p>
+        </div>
         <div class="field"><label for="fFirst">Name <span class="req">*</span></label><input id="fFirst" required autocomplete="given-name" placeholder="Jane"></div>
         <div class="field"><label for="fSur">Surname <span class="req">*</span></label><input id="fSur" required autocomplete="family-name" placeholder="Smith"></div>
         <div class="field"><label for="fPhone">Phone number <span class="req">*</span></label><input id="fPhone" type="tel" required autocomplete="tel" placeholder="+356 9912 3456"></div>
@@ -190,21 +200,13 @@ footer a:hover{color:var(--coral)}
         </div>
         <div class="field"><label for="fExp">Charter type <span class="req">*</span></label>
           <select id="fExp" required>
-            <option value="" disabled selected>Select a charter</option>
-            <option value="Harbour Cruise">Harbour Cruise — from €400</option>
-            <option value="Half Day">Half Day — from €450</option>
-            <option value="Day Charter">Day Charter — from €850</option>
-            <option value="Comino Day">Comino Day — from €850</option>
-            <option value="Sunset Cruise">Sunset Cruise — from €400</option>
-            <option value="Gift Card">Gift Card — any amount</option>
+            <option value="" disabled selected>Choose a boat first</option>
           </select>
         </div>
         <div class="field"><label for="fGuests">Number of people boarding <span class="req">*</span></label><input id="fGuests" type="number" min="1" max="10" required placeholder="e.g. 4"></div>
-        <div class="field"><label for="fFood">Food choice (platter included) <span class="req">*</span></label>
-          <select id="fFood" required>
-            <option value="" disabled selected>Select a package</option>
-            <option>High-End Package (platter included) · +€50</option>
-            <option>Basic Package (platter included)</option>
+        <div class="field" id="foodField" hidden><label for="fFood">Food &amp; extras <span class="req">*</span></label>
+          <select id="fFood">
+            <option value="" disabled selected>Select an option</option>
           </select>
         </div>
         <div class="field span2"><label for="fAllergy">Any allergies or dietary requirements? (optional)</label><textarea id="fAllergy" rows="3" placeholder="e.g. nut allergy, vegetarian, gluten-free…"></textarea></div>
@@ -214,8 +216,8 @@ footer a:hover{color:var(--coral)}
         </div>
         <div class="span2"><p class="bk-error" id="bkError" role="alert" aria-live="assertive"></p></div>
         <div class="span2">
-          <button type="submit" class="btn btn-coral" style="width:100%" id="bookBtn">Request Booking &amp; Pay €100 Deposit</button>
-          <p class="form-note">On submit we email your request to our crew, then take you to the secure €100 Stripe deposit.</p>
+          <button type="submit" class="btn btn-coral" style="width:100%" id="bookBtn">Request Booking &amp; Pay Deposit</button>
+          <p class="form-note" id="formNote">On submit we pass your request to the boat's operator, then take you to the secure Stripe deposit.</p>
         </div>
       </form>
     </div>
@@ -223,7 +225,7 @@ footer a:hover{color:var(--coral)}
     <p class="contact-line">
       Prefer to talk it through? WhatsApp <a href="https://wa.me/35679361991" target="_blank" rel="noopener">+356 7936 1991</a> or <a href="https://wa.me/35677019333" target="_blank" rel="noopener">+356 7701 9333</a><br>
       or email <a href="mailto:mychartersinfo@gmail.com">mychartersinfo@gmail.com</a><br>
-      Departures from Grand Harbour Marina, Birgu (Vittoriosa), Malta
+      The departure marina depends on the boat you choose.
     </p>
   </div>
 </main>
@@ -232,80 +234,89 @@ footer a:hover{color:var(--coral)}
   <div class="terms-modal">
     <button class="terms-close" onclick="closeTerms()" aria-label="Close"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
     <h2>MyCharters — Terms &amp; Conditions</h2>
-    <h3>1. Booking Confirmation</h3>
-    <p>All bookings with MyCharters are considered confirmed once the required deposit has been received and the customer receives a booking confirmation. MyCharters reserves the right to refuse or cancel bookings where necessary for operational, safety, or legal reasons.</p>
-    <h3>2. Payment Terms</h3>
-    <ul><li>A €100 deposit is required to secure the booking.</li><li>The remaining balance is paid after the charter unless otherwise agreed in writing.</li><li>Additional services, fuel surcharges, damages, or overtime may incur extra charges.</li></ul>
-    <h3>3. 24-Hour Cancellation Policy</h3>
+    <h3>1. Our Role</h3>
+    <p>MyCharters is a charter broker. We arrange your booking with an independent, licensed boat operator (named on each boat's page and in your booking). The operator provides the vessel, skipper and crew and is responsible for operating the charter safely and in line with Maltese maritime law.</p>
+    <h3>2. Booking Confirmation</h3>
+    <p>A booking is confirmed once the deposit has been received and the operator has confirmed the date, and you receive a booking confirmation from MyCharters. If the operator cannot confirm your date, we will offer you another suitable boat or refund your deposit in full. MyCharters reserves the right to refuse or cancel bookings where necessary for operational, safety, or legal reasons.</p>
+    <h3>3. Payment Terms</h3>
+    <ul><li>A deposit (shown when you book, usually €100) is required to secure the booking.</li><li>The remaining balance is paid as agreed with the operator, normally after the charter unless otherwise agreed in writing.</li><li>Additional services, fuel surcharges, damages, or overtime may incur extra charges.</li></ul>
+    <h3>4. 24-Hour Cancellation Policy</h3>
     <ul><li>More than 24 hours before departure: full refund of any deposit paid.</li><li>Less than 24 hours before departure: deposit is non-refundable.</li><li>No-shows or late arrivals are treated as a cancellation within 24 hours; deposit non-refundable.</li></ul>
-    <h3>4. Food &amp; Beverages</h3>
-    <ul><li>Guests must inform MyCharters in advance of any allergies or dietary requirements.</li><li>MyCharters is not liable for reactions arising from undisclosed dietary conditions.</li><li>Outside food and beverages require prior approval.</li></ul>
-    <h3>5. Weather &amp; Force Majeure</h3>
-    <p>MyCharters may cancel, delay, or reschedule for unsafe weather, mechanical issues, government restrictions or safety concerns. In such cases customers are offered a rescheduled booking or a full refund of any deposit paid.</p>
-    <h3>6. Customer Responsibilities</h3>
-    <p>Guests must follow crew safety instructions, behave responsibly, and comply with local maritime law. MyCharters may terminate a charter without refund for dangerous, illegal or abusive behaviour.</p>
-    <h3>7. Damage &amp; Liability</h3>
-    <p>Customers are responsible for damage caused by their group. MyCharters is not liable for loss of personal belongings or injuries from failure to follow safety instructions. Participation is at the customer's own risk.</p>
-    <h3>8. Arrival Time</h3>
-    <p>Please arrive 15–30 minutes before departure. Late arrival may reduce charter time without refund or extension.</p>
-    <h3>9. Acceptance of Terms</h3>
+    <h3>5. Food &amp; Beverages</h3>
+    <ul><li>Guests must tell us in advance about any allergies or dietary requirements; we pass them to the operator.</li><li>Neither MyCharters nor the operator is liable for reactions arising from undisclosed dietary conditions.</li><li>Outside food and beverages require prior approval from the operator.</li></ul>
+    <h3>6. Weather &amp; Force Majeure</h3>
+    <p>The operator or MyCharters may cancel, delay, or reschedule for unsafe weather, mechanical issues, government restrictions or safety concerns. In such cases customers are offered a rescheduled booking or a full refund of any deposit paid.</p>
+    <h3>7. Customer Responsibilities</h3>
+    <p>Guests must follow the skipper's and crew's safety instructions, behave responsibly, and comply with local maritime law. The operator may end a charter without refund for dangerous, illegal or abusive behaviour.</p>
+    <h3>8. Damage &amp; Liability</h3>
+    <p>Customers are responsible for damage caused by their group. MyCharters and the operator are not liable for loss of personal belongings or injuries from failure to follow safety instructions. Participation is at the customer's own risk.</p>
+    <h3>9. Arrival Time</h3>
+    <p>Please arrive at the boat's marina 15–30 minutes before departure. Late arrival may reduce charter time without refund or extension.</p>
+    <h3>10. Acceptance of Terms</h3>
     <p>By confirming a booking with MyCharters, the customer acknowledges and agrees to these Terms &amp; Conditions.</p>
   </div>
 </div>
 
 <footer>
-  © <span id="year"></span> MyCharters · <a href="index.html">Home</a> · Grand Harbour Marina, Birgu
+  © <span id="year"></span> MyCharters · <a href="index.html">Home</a> · Private boat charters across Malta &amp; Gozo
 </footer>
 
+<script src="fleet.js"></script>
 <script>
-// CONFIG — replace these two before going live:
-//  1. WEB3FORMS_KEY: free key from https://web3forms.com (register mychartersinfo@gmail.com).
-//  2. STRIPE_LINK: a €100 "Charter deposit" Payment Link from your Stripe dashboard.
+// CONFIG. Boats, prices, deposits and booked dates now live in fleet.js.
+//  WEB3FORMS_KEY: free key from https://web3forms.com (register mychartersinfo@gmail.com)
+//  so every booking is also emailed to you.
 const WA_NUM = "35679361991";
 const EMAIL = "mychartersinfo@gmail.com";
 const WEB3FORMS_KEY = "YOUR_WEB3FORMS_ACCESS_KEY";
-const STRIPE_LINK = "https://buy.stripe.com/14A28saRS8B08MjfooaEE00";
-// ===== BOOKED DATES — block a date for EVERYONE =====
-// Add a line in "YYYY-MM-DD" form to cross a date out for every visitor.
-// Delete a line to free that date up again. (Past dates are auto-disabled.)
-const BOOKED_DATES = [
-  "2026-06-27",
-  "2026-07-04",
-  // "2026-08-15",   ← example: copy this line, change the date, remove the //
-];
 
-document.getElementById("year").textContent = new Date().getFullYear();
-
-// Pre-fill charter from homepage links (?charter=…)
+const $ = (id) => document.getElementById(id);
+const { esc } = MC;
+$("year").textContent = new Date().getFullYear();
 const params = new URLSearchParams(location.search);
-const preCharter = params.get("charter");
-if (preCharter) document.getElementById("fExp").value = preCharter;
 
-// ----- Availability calendar -----
-// Authoritative booked list: add a "YYYY-MM-DD" line to BOOKED_DATES (top of script)
-// to cross a date out for EVERY visitor. Dates the user pays for are also remembered
-// locally (this device) so they show crossed out immediately.
+// ----- Boat picker -----
+const boatSel = $("fBoat"), expSel = $("fExp"), foodSel = $("fFood"), guestsIn = $("fGuests");
+MC.boats.forEach((b) => boatSel.insertAdjacentHTML("beforeend",
+  `<option value="${esc(b.id)}">${esc(b.name)} · ${esc(b.type)}, up to ${b.guests} guests${b.sample ? " (sample)" : ""}</option>`));
+let boat = null;
+
+function applyBoat(id, keepCharter) {
+  boat = MC.get(id);
+  if (!boat) return;
+  boatSel.value = boat.id;
+  $("boatHint").innerHTML = `Operated by ${esc(boat.operator)} · departs ${esc(boat.marina)} · <a href="boat.html?boat=${encodeURIComponent(boat.id)}" target="_blank" rel="noopener">see boat details</a>${boat.sample ? '<span class="tag">Sample listing</span>' : ""}`;
+
+  const prevCharter = keepCharter || expSel.value;
+  expSel.innerHTML = '<option value="" disabled selected>Select a charter</option>' + boat.charters.map((c) =>
+    `<option value="${esc(c.name)}">${esc(c.name)} · ${c.price == null ? esc((c.priceLabel || "price on request").toLowerCase()) : "from " + MC.euro(c.price)}</option>`).join("");
+  if (boat.charters.some((c) => c.name === prevCharter)) expSel.value = prevCharter;
+
+  guestsIn.max = boat.guests;
+  guestsIn.placeholder = `1 to ${boat.guests}`;
+
+  const hasExtras = boat.extras && boat.extras.length;
+  $("foodField").hidden = !hasExtras;
+  foodSel.required = !!hasExtras;
+  foodSel.innerHTML = '<option value="" disabled selected>Select an option</option>' + (boat.extras || []).map((x) =>
+    `<option>${esc(x.name)}${x.price ? " · +" + MC.euro(x.price) : ""}</option>`).join("");
+
+  $("bookBtn").textContent = `Request Booking & Pay €${boat.deposit} Deposit`;
+  $("formNote").textContent = `On submit we pass your request to ${boat.operator}, then take you to the secure €${boat.deposit} Stripe deposit.`;
+
+  if (selDate && MC.bookedSet(boat).has(selDate)) { selDate = ""; syncDateBtn(); }
+  cal.render();
+}
+boatSel.addEventListener("change", () => applyBoat(boatSel.value));
+
+// ----- Availability calendar (follows the chosen boat) -----
 const MONTH_NAMES = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-function bookedSet(){
-  let local = [];
-  try { local = JSON.parse(localStorage.getItem("mc_booked") || "[]"); } catch(e){}
-  return new Set([...BOOKED_DATES, ...local]);
-}
-function rememberLocal(d){
-  try {
-    const a = JSON.parse(localStorage.getItem("mc_booked") || "[]");
-    if (!a.includes(d)){ a.push(d); localStorage.setItem("mc_booked", JSON.stringify(a)); }
-  } catch(e){}
-}
+const bookedNow = () => (boat ? MC.bookedSet(boat) : new Set());
 function isoDate(d){ return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
 function fmtDate(d){ return new Date(d+"T00:00:00").toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short",year:"numeric"}); }
 
-const calBox = document.getElementById("calBox");
-const dateBtn = document.getElementById("fDateBtn");
-const dateLabel = document.getElementById("fDateLabel");
+const calBox = $("calBox"), dateBtn = $("fDateBtn"), dateLabel = $("fDateLabel");
 let selDate = "";
-const preDate = params.get("date");
-if (preDate && !bookedSet().has(preDate) && preDate >= isoDate(new Date())) selDate = preDate;
 
 function syncDateBtn(){
   if (selDate){ dateLabel.textContent = fmtDate(selDate); dateLabel.style.color = "#fff"; }
@@ -316,7 +327,7 @@ function makeCalendar(container, onPick){
   const PREV = '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>';
   const NEXT = '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>';
   function render(){
-    const booked = bookedSet();
+    const booked = bookedNow();
     const today = new Date(); today.setHours(0,0,0,0);
     const canPrev = cur > new Date(today.getFullYear(), today.getMonth(), 1);
     const off = (cur.getDay()+6)%7;
@@ -329,7 +340,7 @@ function makeCalendar(container, onPick){
       const k=isoDate(date);
       const isPast=date<today, isBooked=booked.has(k), sel=selDate===k;
       const cls=["cal-day"]; if(isPast)cls.push("past"); if(isBooked)cls.push("booked"); if(sel)cls.push("selected");
-      html+=`<button type="button" class="${cls.join(" ")}" data-date="${k}" ${(isPast||isBooked)?"disabled":""} aria-label="${isBooked?k+' — already booked':k}">${d}</button>`;
+      html+=`<button type="button" class="${cls.join(" ")}" data-date="${k}" ${(isPast||isBooked)?"disabled":""} aria-label="${isBooked?k+' already booked':k}">${d}</button>`;
     }
     html+=`</div><div class="cal-legend"><span><i class="dot"></i>Available</span><span><span class="bx">15</span> Booked</span></div>`;
     container.innerHTML=html;
@@ -344,113 +355,126 @@ syncDateBtn();
 dateBtn.addEventListener("click", () => { const willOpen = calBox.hidden; calBox.hidden = !willOpen; dateBtn.setAttribute("aria-expanded", String(willOpen)); });
 document.addEventListener("click", e => { if(!calBox.hidden && !calBox.contains(e.target) && !dateBtn.contains(e.target)){ calBox.hidden = true; dateBtn.setAttribute("aria-expanded","false"); } });
 
+// Pre-fill from links: ?boat=…&charter=…&date=…
+const preBoat = params.get("boat") || (MC.boats.length === 1 ? MC.boats[0].id : null);
+if (preBoat) applyBoat(preBoat, params.get("charter"));
+const preDate = params.get("date");
+if (preDate && boat && !MC.bookedSet(boat).has(preDate) && preDate >= isoDate(new Date())) { selDate = preDate; syncDateBtn(); cal.render(); }
+
+if (!MC.boats.length) {
+  $("bookCard").innerHTML = `<div class="bk-success"><h3>Our fleet is being updated</h3>
+    <p>No boats are open for online booking right now. Message us and we'll find you a boat for your dates.</p>
+    <a class="btn btn-coral" href="https://wa.me/${WA_NUM}" target="_blank" rel="noopener">Ask on WhatsApp</a></div>`;
+}
+
 // After a SUCCESSFUL Stripe payment, Stripe redirects back here (?paid=1 / ?session_id=…).
-// Only then do we cross the date out. Clicking "Pay deposit" merely stored it as pending.
-const _ret = new URLSearchParams(location.search);
-if (_ret.get("session_id") || _ret.get("paid")) {
-  const paidDate = localStorage.getItem("mc_pending_date");
-  if (paidDate) { rememberLocal(paidDate); localStorage.removeItem("mc_pending_date"); cal.render(); }
-  document.getElementById("bookCard").innerHTML = `
+// Only then is the date crossed out. Clicking "Pay deposit" merely stored it as pending.
+if (params.get("session_id") || params.get("paid")) {
+  let pending = null;
+  try { pending = JSON.parse(localStorage.getItem("mc_pending") || "null"); } catch (e) {}
+  const legacy = localStorage.getItem("mc_pending_date");
+  if (!pending && legacy) pending = { boat: "capelli-tempest-900", date: legacy };
+  if (pending) { MC.rememberBooked(pending.boat, pending.date); localStorage.removeItem("mc_pending"); localStorage.removeItem("mc_pending_date"); }
+  const paidBoat = pending ? MC.get(pending.boat) : null;
+  $("bookCard").innerHTML = `
     <div class="bk-success">
       <div class="bk-badge"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
-      <h3>Deposit received — grazzi!</h3>
-      <p>Your €100 deposit is in${paidDate ? ` and your date (${fmtDate(paidDate)}) is now secured` : ""}. We'll confirm the details with you on WhatsApp shortly. See you on the water!</p>
+      <h3>Deposit received. Grazzi!</h3>
+      <p>Your deposit is in${pending ? ` for ${fmtDate(pending.date)}${paidBoat ? " aboard the " + esc(paidBoat.name) : ""}` : ""}. We're confirming the date with the operator now and will message you on WhatsApp shortly. If the boat can't take you, we'll offer another or refund your deposit in full.</p>
       <a class="btn btn-coral" href="index.html">Back to home</a>
     </div>`;
 }
 
 // Terms modal
-const termsOv = document.getElementById("termsOverlay");
+const termsOv = $("termsOverlay");
 function openTerms(e){ if(e) e.preventDefault(); termsOv.classList.add("open"); document.body.style.overflow = "hidden"; }
 function closeTerms(){ termsOv.classList.remove("open"); document.body.style.overflow = ""; }
 termsOv.addEventListener("click", e => { if (e.target === termsOv) closeTerms(); });
 addEventListener("keydown", e => { if (e.key === "Escape") closeTerms(); });
 
-// Submit → email + WhatsApp + Stripe deposit
-const bookForm = document.getElementById("bookForm");
+// Submit → email + staff WhatsApp + Stripe deposit
+const bookForm = $("bookForm");
 bookForm.addEventListener("submit", async e => {
   e.preventDefault();
-  const err = document.getElementById("bkError");
+  const err = $("bkError");
+  const fail = (msg, focusEl) => { err.textContent = msg; err.style.display = "block"; if (focusEl) focusEl.focus(); };
   err.style.display = "none";
   if (!bookForm.checkValidity()){
     const bad = bookForm.querySelector(":invalid");
-    err.textContent = document.getElementById("fTerms").checked
+    if (bad === guestsIn && guestsIn.value && boat && Number(guestsIn.value) > boat.guests)
+      return fail(`The ${boat.name} takes up to ${boat.guests} guests. For a bigger group, choose a larger boat.`, guestsIn);
+    return fail($("fTerms").checked
       ? "Please complete all required fields highlighted above."
-      : "Please complete all required fields and accept the Terms & Conditions.";
-    err.style.display = "block";
-    if (bad) bad.focus();
-    return;
+      : "Please complete all required fields and accept the Terms & Conditions.", bad);
   }
+  if (!boat) return fail("Please choose a boat.", boatSel);
   if (!selDate){
-    err.textContent = "Please choose a preferred date.";
-    err.style.display = "block";
+    fail("Please choose a preferred date.");
     calBox.hidden = false; dateBtn.setAttribute("aria-expanded","true"); dateBtn.focus();
     return;
   }
-  const v = id => document.getElementById(id).value.trim();
+  const v = id => $(id).value.trim();
   const date = selDate, first = v("fFirst");
-  if (bookedSet().has(date)){
-    err.textContent = "Sorry, that date is already booked. Please choose another date.";
-    err.style.display = "block"; calBox.hidden = false; return;
+  if (MC.bookedSet(boat).has(date)){
+    fail("Sorry, that date is already booked for this boat. Please choose another date or boat.");
+    calBox.hidden = false; return;
   }
+  const extras = boat.extras && boat.extras.length ? v("fFood") : "";
   const summary = [
     "New booking request — MyCharters",
+    `Boat: ${boat.name} (${boat.type}) · operator: ${boat.operator}`,
+    `Marina: ${boat.marina}`,
     `Name: ${first} ${v("fSur")}`,
     `Phone: ${v("fPhone")}`,
     `Address: ${v("fAddr")}`,
     `Preferred date: ${date}`,
     `Charter: ${v("fExp")}`,
     `Guests: ${v("fGuests")}`,
-    `Food: ${v("fFood")}`,
+    extras ? `Extras: ${extras}` : null,
     `Allergies / dietary: ${v("fAllergy") || "None declared"}`,
-    "Deposit: €100 via Stripe",
+    `Deposit: €${boat.deposit} via Stripe`,
     "Terms & Conditions: accepted"
-  ].join("\n");
+  ].filter(Boolean).join("\n");
 
-  const btn = document.getElementById("bookBtn");
+  const btn = $("bookBtn");
   btn.disabled = true; btn.textContent = "Sending…";
 
-  // Email — Web3Forms if configured (silent backup)
   if (WEB3FORMS_KEY !== "YOUR_WEB3FORMS_ACCESS_KEY"){
     try {
       await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json", "Accept": "application/json" },
-        body: JSON.stringify({ access_key: WEB3FORMS_KEY, subject: `Booking request — ${first} ${v("fSur")} (${date})`, from_name: "MyCharters Website", message: summary })
+        body: JSON.stringify({ access_key: WEB3FORMS_KEY, subject: `Booking request: ${boat.name}, ${first} ${v("fSur")} (${date})`, from_name: "MyCharters Website", message: summary })
       });
     } catch (e2) { /* the WhatsApp step below still delivers it */ }
   }
-  // "Step 2" — open WhatsApp pre-filled with the full booking. A wa.me link opens one
-  // chat per tap, so we show a Send button for each MyCharters number.
-  const waText = encodeURIComponent(summary);
-  const waIcon = '<svg class="ico" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5 14.2c-.2.6-1.2 1.2-1.7 1.2-.4.1-1 .1-1.6-.1a14 14 0 0 1-1.5-.5c-2.6-1.1-4.3-3.7-4.4-3.9-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.4l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1.1 2.2 1.4 2.5 1.5.3.1.5.1.7-.1l1-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.3 0 .2 0 .7-.2 1.1z"/></svg>';
-  const waBtn = (num, label) => `<a class="btn" style="background:#25D366;color:#fff" href="https://wa.me/${num}?text=${waText}" target="_blank" rel="noopener">${waIcon}Send to ${label}</a>`;
-  const sendBtns = `<p class="form-note" style="font-size:13px;color:rgba(255,255,255,.82);margin-bottom:-2px">Step 2 · Send us your booking details on WhatsApp</p>${waBtn("35679361991", "+356 7936 1991")}${waBtn("35677019333", "+356 7701 9333")}`;
 
-  // Auto-send the booking to staff WhatsApp via the serverless function (/api/booking).
-  // Works once deployed on Vercel with the Twilio env vars set; on the static-only
-  // host this just no-ops and the email path above covers it.
   try {
     await fetch("/api/booking", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
+        boat: boat.name, operator: boat.operator, marina: boat.marina, deposit: boat.deposit,
         name: first, surname: v("fSur"), phone: v("fPhone"), address: v("fAddr"),
-        date, charter: v("fExp"), guests: v("fGuests"), food: v("fFood"), allergies: v("fAllergy")
+        date, charter: v("fExp"), guests: v("fGuests"), food: extras, allergies: v("fAllergy")
       })
     });
-  } catch (e3) { /* backend not reachable yet — email fallback covers it */ }
+  } catch (e3) { /* backend not reachable — the WhatsApp buttons below still deliver it */ }
 
-  // Stripe deposit + success state
-  const safeName = first.replace(/[<>&"]/g, "");
-  document.getElementById("bookCard").innerHTML = `
+  const waText = encodeURIComponent(summary);
+  const waIcon = '<svg class="ico" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5 14.2c-.2.6-1.2 1.2-1.7 1.2-.4.1-1 .1-1.6-.1a14 14 0 0 1-1.5-.5c-2.6-1.1-4.3-3.7-4.4-3.9-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.4l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1.1 2.2 1.4 2.5 1.5.3.1.5.1.7-.1l1-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.3 0 .2 0 .7-.2 1.1z"/></svg>';
+  const waBtn = (num, label) => `<a class="btn" style="background:#25D366;color:#fff" href="https://wa.me/${num}?text=${waText}" target="_blank" rel="noopener">${waIcon}Send to ${label}</a>`;
+  const sendBtns = `<p class="form-note" style="font-size:13px;color:rgba(255,255,255,.82);margin-bottom:-2px">Step 2 · Send us your booking details on WhatsApp</p>${waBtn("35679361991", "+356 7936 1991")}${waBtn("35677019333", "+356 7701 9333")}`;
+
+  const pending = JSON.stringify({ boat: boat.id, date }).replace(/"/g, "&quot;");
+  $("bookCard").innerHTML = `
     <div class="bk-success">
       <div class="bk-badge"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
-      <h3>Grazzi, ${safeName}! Just two quick steps.</h3>
-      <p>Tap below to send us your booking details on WhatsApp, then secure your date with the €100 deposit.</p>
+      <h3>Grazzi, ${esc(first)}! Just two quick steps.</h3>
+      <p>Your request for the ${esc(boat.name)} on ${fmtDate(date)} is in. Send us the details on WhatsApp, then hold the date with the €${boat.deposit} deposit.</p>
       ${sendBtns}
-      <a class="btn btn-coral" href="${STRIPE_LINK}" target="_blank" rel="noopener" onclick="localStorage.setItem('mc_pending_date','${date}')">Step 3 · Pay €100 deposit</a>
-      <p class="form-note">Your booking is confirmed once the deposit is received.<br>Free cancellation up to 24h before departure.</p>
+      <a class="btn btn-coral" href="${esc(boat.depositLink)}" target="_blank" rel="noopener" onclick="localStorage.setItem('mc_pending','${pending}')">Step 3 · Pay €${boat.deposit} deposit</a>
+      <p class="form-note">${esc(boat.operator)} confirms your date once the deposit is in. If the boat is unavailable, your deposit is refunded in full.<br>Free cancellation up to 24h before departure.</p>
     </div>`;
 });
 </script>

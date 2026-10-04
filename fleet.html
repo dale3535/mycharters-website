@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Fleet | Private Boat Charters in Malta | MyCharters</title>
+<meta name="description" content="Browse vetted private charter boats in Malta: RIBs, motor yachts and catamarans with licensed skippers. Compare prices, check availability and book with a €100 deposit.">
+<meta name="theme-color" content="#0E3456">
+<link rel="canonical" href="https://mycharters-website.vercel.app/fleet">
+<link rel="icon" type="image/png" href="mycharters-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="broker.css">
+</head>
+<body>
+
+<header>
+  <div class="container row">
+    <a href="index.html" class="logo" aria-label="MyCharters home">
+      <img class="logo-mark" src="mycharters-logo.png" alt="">
+      <span class="logo-word">My<span>Charters</span></span>
+    </a>
+    <nav class="hlinks" aria-label="Main">
+      <a class="opt" href="index.html#how">How it works</a>
+      <a href="fleet.html" aria-current="page">Fleet</a>
+      <a class="opt" href="index.html#partners">List your boat</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <div class="page-head">
+      <p class="eyebrow">The Fleet</p>
+      <h1>Find your boat,<br><em>pick your day.</em></h1>
+      <p>Every boat is privately chartered with a licensed skipper. Compare what's included, check the dates, then request your booking. Prices on request.</p>
+      <div class="gold-divider"></div>
+    </div>
+
+    <p class="sample-note" id="sampleNote" hidden>Preview mode: boats marked <b>Sample listing</b> are demo boats to show the layout. They never appear on the live site.</p>
+
+    <form class="filters glass" id="filters" aria-label="Filter boats">
+      <div><label for="fGuests">Guests</label>
+        <select id="fGuests">
+          <option value="0">Any group size</option>
+          <option value="2">2+ guests</option>
+          <option value="6">6+ guests</option>
+          <option value="10">10+ guests</option>
+          <option value="12">12+ guests</option>
+        </select>
+      </div>
+      <div><label for="fType">Boat type</label><select id="fType"><option value="">All types</option></select></div>
+      <div><label for="fTrip">Trip</label><select id="fTrip"><option value="">Any trip</option></select></div>
+    </form>
+
+    <p class="result-count" id="count" aria-live="polite"></p>
+    <div class="boat-grid" id="grid"></div>
+    <div class="empty glass" id="empty" hidden>
+      <h3>No boat matches those filters</h3>
+      <p>Try a different group size or trip. Or tell us what you need on WhatsApp and we'll find a boat for you.</p>
+      <a class="btn btn-coral" href="https://wa.me/35679361991?text=Hi%20MyCharters!%20I'm%20looking%20for%20a%20boat%20charter." target="_blank" rel="noopener">Ask on WhatsApp</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  © <span id="year"></span> MyCharters · <a href="index.html">Home</a> · Private boat charters, Malta
+</footer>
+
+<script src="fleet.js"></script>
+<script>
+const ICON = {
+  guests: '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M21.5 20a6.5 6.5 0 0 0-4-6"/></svg>',
+  length: '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M7 8l-4 4 4 4M17 8l4 4-4 4"/></svg>',
+  pin: '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>',
+};
+const { esc } = MC;
+const $ = (id) => document.getElementById(id);
+$("year").textContent = new Date().getFullYear();
+$("sampleNote").hidden = !MC.boats.some((b) => b.sample);
+
+// Fill type + trip filters from the boats actually listed
+MC.types.forEach((t) => $("fType").insertAdjacentHTML("beforeend", `<option>${esc(t)}</option>`));
+[...new Set(MC.boats.flatMap((b) => b.charters.filter((c) => c.name !== "Gift Card").map((c) => c.name)))]
+  .forEach((t) => $("fTrip").insertAdjacentHTML("beforeend", `<option>${esc(t)}</option>`));
+
+const qs = new URLSearchParams(location.search);
+if (qs.get("charter") && [...$("fTrip").options].some((o) => o.value === qs.get("charter"))) $("fTrip").value = qs.get("charter");
+if (qs.get("guests")) $("fGuests").value = qs.get("guests");
+
+function card(b) {
+  const from = MC.fromPrice(b);
+  const href = `boat.html?boat=${encodeURIComponent(b.id)}`;
+  return `<article class="bcard glass">
+    <a class="img" href="${href}" aria-label="${esc(b.name)}">
+      <img src="${esc(MC.cover(b))}" alt="${esc(b.name)}" loading="lazy">
+      <span class="chip">${esc(b.type)}</span>
+      ${b.sample ? '<span class="sample-badge">Sample listing</span>' : ""}
+    </a>
+    <div class="body">
+      <h3><a href="${href}">${esc(b.name)}</a></h3>
+      <p class="op">Operated by ${esc(b.operator)}</p>
+      <div class="meta">
+        <span>${ICON.guests}Up to ${b.guests}</span>
+        <span>${ICON.length}${esc(b.length)}</span>
+        <span>${ICON.pin}${esc(b.marina)}</span>
+      </div>
+      <div class="foot">
+        <p class="from">${from == null ? "Price" : "From"}<b>${from == null ? "On request" : MC.euro(from)}</b></p>
+        <div class="acts">
+          <a class="btn btn-ghost btn-sm" href="${href}">Details</a>
+          <a class="btn btn-coral btn-sm" href="booking.html?boat=${encodeURIComponent(b.id)}">Book</a>
+        </div>
+      </div>
+    </div>
+  </article>`;
+}
+
+function render() {
+  const guests = Number($("fGuests").value), type = $("fType").value, trip = $("fTrip").value;
+  const list = MC.boats.filter((b) =>
+    b.guests >= guests &&
+    (!type || b.type === type) &&
+    (!trip || b.charters.some((c) => c.name === trip))
+  );
+  $("grid").innerHTML = list.map(card).join("");
+  $("empty").hidden = list.length > 0;
+  $("count").textContent = list.length ? `${list.length} boat${list.length === 1 ? "" : "s"} available to charter` : "";
+}
+$("filters").addEventListener("change", render);
+render();
+</script>
+</body>
+</html>
