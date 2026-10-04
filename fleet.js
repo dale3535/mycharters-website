@@ -31,7 +31,7 @@ const BOATS = [
     name: "Capelli Tempest 900",
     type: "RIB",
     operator: "MyCharters",
-    marina: "Grand Harbour Marina, Birgu",
+    marina: "Malta (pick-up point confirmed on booking)",
     length: "9 m",
     guests: 10,
     summary: "A fast, elegant Italian luxury RIB with a cabin, toilet and freshwater shower. Quick enough to reach Gozo while others are still queuing.",
