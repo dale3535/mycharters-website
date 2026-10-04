@@ -191,6 +191,44 @@ const BOATS = [
   },
 
   {
+    id: "bombard-explorer-600",
+    published: true,
+    sample: false,
+    name: "Bombard Explorer 600",
+    type: "RIB",
+    operator: "Prestige Charters Malta",
+    marina: "Ta' Xbiex (flexible pick-up)",
+    length: "20 ft",
+    guests: 5,
+    summary: "A nimble RIB for up to 5 guests, restored in 2021, reaching 23 knots for easy hops to the Blue Lagoon, Crystal Lagoon, Elephant Rock and the south coast of Gozo. No fixed itinerary, flexible pick-up near where you're staying, and children welcome. Runs May to October.",
+    // No clean photos yet (the BoatBooker ones are watermarked). Ask Prestige
+    // Charters for originals, put them in images/boats/bombard-explorer-600/.
+    photos: [],
+    specs: [
+      ["Model", "Bombard Explorer 600"],
+      ["Year", "2001, restored 2021"],
+      ["Length", "20 ft"],
+      ["Guests", "Up to 5"],
+      ["Engine", "Yamaha 115 hp outboard"],
+      ["Top speed", "23 knots"],
+      ["Season", "1 May to 30 October"],
+    ],
+    // Prices as listed on BoatBooker (2026). Confirm your own rates with Prestige Charters.
+    charters: [
+      { name: "Sunset Cruise", duration: "2 hours · harbour cruise from 5pm", price: 185 },
+      { name: "Half Day", duration: "4 hours · Comino & caves", price: 335 },
+      { name: "Comino Day", duration: "6 hours · Comino & caves, from 8am", price: 490 },
+    ],
+    extras: [],
+    includes: ["Skipper", "Bimini shade", "Bow sundeck", "Ice box", "Audio system with outside speakers", "Flexible pick-up", "Life jackets & VHF radio", "Snorkelling gear (optional extra)", "Alcohol allowed on board"],
+    deposit: 100,
+    depositLink: DEFAULT_DEPOSIT_LINK,
+    bookedDates: [
+      // "2026-08-15",   ← example: copy this line, change the date, remove the //
+    ],
+  },
+
+  {
     id: "capelli-tempest-900",
     published: false, // hidden: Saver is the first live boat. Set to true to show it again.
     sample: false,
