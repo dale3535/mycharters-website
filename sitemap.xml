@@ -21,6 +21,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://mycharters-website.vercel.app/boat?boat=beneteau-swift-trawler-50</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://mycharters-website.vercel.app/booking</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

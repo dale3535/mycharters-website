@@ -13,6 +13,7 @@
 //                the page address ends with ?samples=1, never on the live
 //                site. Delete the sample boats once real ones are added.
 //    charters    the trips this boat offers, with the starting price in EUR.
+//                Use price: null for "Price on request" (or set priceLabel).
 //    extras      optional add-ons the customer picks when booking (leave [] for none).
 //    deposit     deposit in EUR taken through Stripe to secure the booking.
 //    depositLink a Stripe Payment Link for exactly that deposit amount.
@@ -109,6 +110,47 @@ const BOATS = [
   },
 
   {
+    id: "beneteau-swift-trawler-50",
+    published: true,
+    sample: false,
+    name: "Beneteau Swift Trawler 50",
+    type: "Motor yacht",
+    operator: "Captain Nev's Charters",
+    marina: "Ta' Xbiex Marina",
+    length: "14.74 m",
+    guests: 8,
+    summary: "A spacious 2018/19 flybridge trawler yacht with two crew, for up to 8 guests. Stretch out on the big sun deck at the bow, take in the view from the flybridge, and cruise in real comfort. Perfect for special occasions, birthdays, anniversaries and unforgettable day trips.",
+    photos: [
+      "images/boats/beneteau-swift-trawler-50/anchored.jpg",
+      "images/boats/beneteau-swift-trawler-50/flybridge-helm.jpg",
+      "images/boats/beneteau-swift-trawler-50/bow-deck.jpg",
+      "images/boats/beneteau-swift-trawler-50/sun-pad.jpg",
+    ],
+    specs: [
+      ["Model", "Beneteau Swift Trawler 50"],
+      ["Year", "2018/19"],
+      ["Length", "14.74 m"],
+      ["Guests", "Up to 8"],
+      ["Crew", "2 (skipper & deckhand)"],
+      ["Engines", "Twin Cummins 425 hp inboards"],
+      ["Design", "Flybridge trawler yacht"],
+    ],
+    // TO CONFIRM: no prices published for this yacht yet. price: null shows "Price on request".
+    charters: [
+      { name: "Half Day", duration: "4 hours · 8:30am or 1:30pm", price: null },
+      { name: "Day Charter", duration: "Full day · 9am to 5pm", price: null },
+      { name: "Sunset Cruise", duration: "Evening", price: null },
+    ],
+    extras: [],
+    includes: ["Skipper & deckhand", "Flybridge with panoramic views", "Comfortable seating", "Large sunbathing areas", "Storage for your belongings"],
+    deposit: 100,
+    depositLink: DEFAULT_DEPOSIT_LINK,
+    bookedDates: [
+      // "2026-08-15",   ← example: copy this line, change the date, remove the //
+    ],
+  },
+
+  {
     id: "capelli-tempest-900",
     published: false, // hidden: Saver is the first live boat. Set to true to show it again.
     sample: false,
@@ -132,7 +174,7 @@ const BOATS = [
       { name: "Day Charter", duration: "8 hours", price: 850 },
       { name: "Comino Day", duration: "Full day", price: 850 },
       { name: "Sunset Cruise", duration: "Evening", price: 400 },
-      { name: "Gift Card", duration: "Any charter", price: null },
+      { name: "Gift Card", duration: "Any charter", price: null, priceLabel: "Any amount" },
     ],
     extras: [
       { name: "Basic food package (platter included)", price: 0 },

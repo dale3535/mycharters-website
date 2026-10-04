@@ -89,7 +89,7 @@ $("sampleNote").hidden = !MC.boats.some((b) => b.sample);
 
 // Fill type + trip filters from the boats actually listed
 MC.types.forEach((t) => $("fType").insertAdjacentHTML("beforeend", `<option>${esc(t)}</option>`));
-[...new Set(MC.boats.flatMap((b) => b.charters.filter((c) => c.price != null).map((c) => c.name)))]
+[...new Set(MC.boats.flatMap((b) => b.charters.filter((c) => c.name !== "Gift Card").map((c) => c.name)))]
   .forEach((t) => $("fTrip").insertAdjacentHTML("beforeend", `<option>${esc(t)}</option>`));
 
 const qs = new URLSearchParams(location.search);
@@ -114,7 +114,7 @@ function card(b) {
         <span>${ICON.pin}${esc(b.marina)}</span>
       </div>
       <div class="foot">
-        <p class="from">From<b>${MC.euro(from)}</b></p>
+        <p class="from">${from == null ? "Price" : "From"}<b>${from == null ? "On request" : MC.euro(from)}</b></p>
         <div class="acts">
           <a class="btn btn-ghost btn-sm" href="${href}">Details</a>
           <a class="btn btn-coral btn-sm" href="booking.html?boat=${encodeURIComponent(b.id)}">Book</a>

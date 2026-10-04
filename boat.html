@@ -81,7 +81,7 @@ if (!boat) {
         <div class="panel glass">
           <h2>Charters &amp; prices</h2>
           <ul class="price-list">${boat.charters.map((c) =>
-            `<li><span>${esc(c.name)}<small>${esc(c.duration)}</small></span><b>${c.price == null ? "Any amount" : "from " + MC.euro(c.price)}</b></li>`).join("")}</ul>
+            `<li><span>${esc(c.name)}<small>${esc(c.duration)}</small></span><b>${c.price == null ? esc(c.priceLabel || "Price on request") : "from " + MC.euro(c.price)}</b></li>`).join("")}</ul>
         </div>
 
         <div class="panel glass">
@@ -100,8 +100,8 @@ if (!boat) {
 
       <aside class="book-box">
         <div class="panel glass" style="margin-top:0">
-          <p class="eyebrow">From</p>
-          <p class="d-title" style="margin-top:6px;color:var(--coral-light)">${MC.euro(from)}</p>
+          <p class="eyebrow">${from == null ? "Price" : "From"}</p>
+          <p class="d-title" style="margin-top:6px;color:var(--coral-light)">${from == null ? "On request" : MC.euro(from)}</p>
           <div class="meta">
             <span>Up to ${boat.guests} guests</span><span>${esc(boat.length)}</span><span>${esc(boat.marina)}</span>
           </div>

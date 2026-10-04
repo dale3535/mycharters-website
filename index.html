@@ -685,7 +685,7 @@ fleetGrid.innerHTML = featured.length ? featured.map((b, i) => {
       <h3>${MC.esc(b.name)}</h3>
       <div class="fleet-meta"><span>Up to ${b.guests} guests</span><span>${MC.esc(b.length)}</span><span>${MC.esc(b.marina)}</span></div>
       <p class="desc">${MC.esc(b.summary)}</p>
-      <div class="foot"><span class="price">From ${MC.euro(MC.fromPrice(b))}</span>
+      <div class="foot"><span class="price">${MC.fromPrice(b) == null ? "Price on request" : "From " + MC.euro(MC.fromPrice(b))}</span>
         <a class="enquire" href="${href}">View boat <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
     </div>

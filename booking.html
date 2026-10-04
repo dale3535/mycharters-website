@@ -289,7 +289,7 @@ function applyBoat(id, keepCharter) {
 
   const prevCharter = keepCharter || expSel.value;
   expSel.innerHTML = '<option value="" disabled selected>Select a charter</option>' + boat.charters.map((c) =>
-    `<option value="${esc(c.name)}">${esc(c.name)} · ${c.price == null ? "any amount" : "from " + MC.euro(c.price)}</option>`).join("");
+    `<option value="${esc(c.name)}">${esc(c.name)} · ${c.price == null ? esc((c.priceLabel || "price on request").toLowerCase()) : "from " + MC.euro(c.price)}</option>`).join("");
   if (boat.charters.some((c) => c.name === prevCharter)) expSel.value = prevCharter;
 
   guestsIn.max = boat.guests;
