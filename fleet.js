@@ -13,8 +13,7 @@
 //                the page address ends with ?samples=1, never on the live
 //                site. Delete the sample boats once real ones are added.
 //    charters    the trips this boat offers, with the starting price in EUR.
-//                All prices are currently null = "Price on request".
-//                Put a number (e.g. price: 450) to show "from €450" instead.
+//                A number shows "from €450"; price: null shows "Price on request".
 //    extras      optional add-ons the customer picks when booking (leave [] for none).
 //    deposit     deposit in EUR taken through Stripe to secure the booking.
 //    depositLink a Stripe Payment Link for exactly that deposit amount.
@@ -54,10 +53,11 @@ const BOATS = [
       ["Engines", "Twin Yamaha 150 hp outboards"],
       ["Design", "Walkaround"],
     ],
+    // Public 'from' prices (operator site / BoatBooker). Confirm with the operator.
     charters: [
-      { name: "Half Day", duration: "4 hours · 8:30am or 1:30pm", price: null },
-      { name: "Day Charter", duration: "Full day · 9am to 5pm", price: null },
-      { name: "Sunset Cruise", duration: "Evening", price: null },
+      { name: "Half Day", duration: "4 hours · 8:30am or 1:30pm", price: 375 },
+      { name: "Day Charter", duration: "Full day · 9am to 5pm", price: 580 },
+      { name: "Sunset Cruise", duration: "Evening", price: 300 },
     ],
     extras: [],
     includes: ["Licensed skipper", "Comfortable seating", "Sunbathing areas at bow & stern", "Cosy cabin", "Deck shower", "Onboard fridge", "Bluetooth sound system", "Swim platform", "Storage for your belongings"],
@@ -95,10 +95,11 @@ const BOATS = [
       ["Engines", "Twin Yamaha 150 hp outboards"], // TO CONFIRM: photos show one outboard
       ["Design", "Walkaround"],
     ],
+    // Public 'from' prices (operator site / BoatBooker). Confirm with the operator.
     charters: [
-      { name: "Half Day", duration: "4 hours · 8:30am or 1:30pm", price: null },
-      { name: "Day Charter", duration: "Full day · 9am to 5pm", price: null },
-      { name: "Sunset Cruise", duration: "Evening", price: null },
+      { name: "Half Day", duration: "4 hours · 8:30am or 1:30pm", price: 375 },
+      { name: "Day Charter", duration: "Full day · 9am to 5pm", price: 580 },
+      { name: "Sunset Cruise", duration: "Evening", price: 300 },
     ],
     extras: [],
     includes: ["Licensed skipper", "Comfortable seating", "Shaded bimini top", "Sunbathing areas", "Storage for your belongings"],
@@ -173,10 +174,11 @@ const BOATS = [
       ["Top speed", "40 knots"],
       ["Design", "Center console"],
     ],
+    // Public 'from' prices (operator site / BoatBooker). Confirm with the operator.
     charters: [
-      { name: "Sunset Cruise", duration: "3 hours · from 5:30pm", price: null },
-      { name: "Half Day", duration: "4 hours · 9:30am or 1:30pm", price: null },
-      { name: "Day Charter", duration: "8 hours · from 9am", price: null },
+      { name: "Sunset Cruise", duration: "3 hours · from 5:30pm", price: 400 },
+      { name: "Half Day", duration: "4 hours · 9:30am or 1:30pm", price: 460 },
+      { name: "Day Charter", duration: "8 hours · from 9am", price: 750 },
     ],
     extras: [],
     includes: ["Licensed skipper", "Bimini shade", "Bow sundeck", "Cabin", "Private toilet", "Refrigerator", "Premium sound system & WiFi", "Snorkelling gear available", "Life jackets for all guests", "GPS, chartplotter & VHF radio"],
@@ -210,10 +212,11 @@ const BOATS = [
       ["Top speed", "23 knots"],
       ["Season", "1 May to 30 October"],
     ],
+    // Public 'from' prices (operator site / BoatBooker). Confirm with the operator.
     charters: [
-      { name: "Sunset Cruise", duration: "2 hours · harbour cruise from 5pm", price: null },
-      { name: "Half Day", duration: "4 hours · Comino & caves", price: null },
-      { name: "Comino Day", duration: "6 hours · Comino & caves, from 8am", price: null },
+      { name: "Sunset Cruise", duration: "2 hours · harbour cruise from 5pm", price: 185 },
+      { name: "Half Day", duration: "4 hours · Comino & caves", price: 335 },
+      { name: "Comino Day", duration: "6 hours · Comino & caves, from 8am", price: 490 },
     ],
     extras: [],
     includes: ["Skipper", "Bimini shade", "Bow sundeck", "Ice box", "Audio system with outside speakers", "Flexible pick-up", "Life jackets & VHF radio", "Snorkelling gear (optional extra)", "Alcohol allowed on board"],
@@ -274,7 +277,7 @@ const BOATS = [
 //  Helpers used by the pages. No need to edit below this line.
 // ---------------------------------------------------------------------
 (function () {
-  const LIVE_HOSTS = ["mycharters-website.vercel.app", "dale3535.github.io"];
+  const LIVE_HOSTS = ["mychartersmlt.com", "www.mychartersmlt.com", "mycharters-website.vercel.app", "dale3535.github.io"];
   const qs = new URLSearchParams(location.search);
   const showSamples = qs.get("samples") === "1" || !LIVE_HOSTS.includes(location.hostname);
 

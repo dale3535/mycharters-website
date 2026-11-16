@@ -2,10 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<script>if(location.hostname==="dale3535.github.io"){location.replace("https://mychartersmlt.com"+(location.pathname.replace(/^\/mycharters-website/,"").replace(/\.html$/,"").replace(/\/index$/,"/")||"/")+location.search);}</script>
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
+<script defer src="/_vercel/insights/script.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Book Your Charter | MyCharters Malta</title>
-<meta name="description" content="Book a private boat charter in Malta through MyCharters. Pick your boat and date, secure it with a €100 deposit, with free cancellation up to 24 hours before departure.">
-<link rel="canonical" href="https://mycharters-website.vercel.app/booking">
+<meta name="description" content="Book a private boat charter in Malta through MyCharters. Pick your boat and date and send a request. We confirm availability and price first; you only pay a €100 deposit once you accept.">
+<link rel="canonical" href="https://mychartersmlt.com/booking">
 <link rel="icon" type="image/png" href="mycharters-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -93,6 +96,7 @@ main{flex:1;padding-bottom:40px}
 .bk-badge{width:60px;height:60px;border-radius:999px;background:var(--coral);color:#fff;display:flex;align-items:center;justify-content:center}
 .bk-badge .ico{width:28px;height:28px}
 .bk-success .btn{width:100%;max-width:360px}
+.next-steps{text-align:left;max-width:420px;margin:6px auto 0;padding-left:20px;font-size:13.5px;line-height:1.7;color:rgba(255,255,255,.75)}
 
 .contact-line{text-align:center;padding:8px 0 48px;font-size:14px;color:rgba(255,255,255,.55);line-height:1.9}
 .contact-line a{color:rgba(255,255,255,.85);text-decoration:underline}
@@ -177,7 +181,7 @@ footer a:hover{color:var(--coral)}
     <div class="intro">
       <p class="eyebrow">Book Your Charter</p>
       <h1>Two minutes to the<br><em>best day of your trip.</em></h1>
-      <p class="lede">Choose your boat, your trip and your day. A €100 deposit holds the date while the boat's operator confirms. If the boat turns out to be unavailable, the deposit is refunded in full.</p>
+      <p class="lede">Choose your boat, your trip and your day. We check availability with the operator and send you a confirmed price, usually within a few hours. You only pay the €100 deposit once you accept.</p>
       <div class="gold-divider"></div>
     </div>
 
@@ -212,12 +216,12 @@ footer a:hover{color:var(--coral)}
         <div class="field span2"><label for="fAllergy">Any allergies or dietary requirements? (optional)</label><textarea id="fAllergy" rows="3" placeholder="e.g. nut allergy, vegetarian, gluten-free…"></textarea></div>
         <div class="span2 check-row">
           <input id="fTerms" type="checkbox" required>
-          <label for="fTerms">I have read and accept the <a href="#" onclick="openTerms(event)">Terms &amp; Conditions</a>, including the 24-hour cancellation policy. <span class="req">*</span></label>
+          <label for="fTerms">I have read and accept the <a href="#" onclick="openTerms(event)">Terms &amp; Conditions</a>, including the 24-hour cancellation policy, and the <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>. <span class="req">*</span></label>
         </div>
         <div class="span2"><p class="bk-error" id="bkError" role="alert" aria-live="assertive"></p></div>
         <div class="span2">
-          <button type="submit" class="btn btn-coral" style="width:100%" id="bookBtn">Request Booking &amp; Pay Deposit</button>
-          <p class="form-note" id="formNote">On submit we pass your request to the boat's operator, then take you to the secure Stripe deposit.</p>
+          <button type="submit" class="btn btn-coral" style="width:100%" id="bookBtn">Send Booking Request</button>
+          <p class="form-note" id="formNote">No payment now. We confirm availability and price with the operator, then send you a secure deposit link.</p>
         </div>
       </form>
     </div>
@@ -237,9 +241,9 @@ footer a:hover{color:var(--coral)}
     <h3>1. Our Role</h3>
     <p>MyCharters is a charter broker. We arrange your booking with an independent, licensed boat operator (named on each boat's page and in your booking). The operator provides the vessel, skipper and crew and is responsible for operating the charter safely and in line with Maltese maritime law.</p>
     <h3>2. Booking Confirmation</h3>
-    <p>A booking is confirmed once the deposit has been received and the operator has confirmed the date, and you receive a booking confirmation from MyCharters. If the operator cannot confirm your date, we will offer you another suitable boat or refund your deposit in full. MyCharters reserves the right to refuse or cancel bookings where necessary for operational, safety, or legal reasons.</p>
+    <p>Sending a booking request does not commit you to anything. We check availability with the operator and send you a quote. A booking is confirmed once you accept the quote, the deposit has been received, and you receive a booking confirmation from MyCharters. If the operator later cannot honour a confirmed date, we will offer you another suitable boat or refund your deposit in full. MyCharters reserves the right to refuse or cancel bookings where necessary for operational, safety, or legal reasons.</p>
     <h3>3. Payment Terms</h3>
-    <ul><li>A deposit (shown when you book, usually €100) is required to secure the booking.</li><li>The remaining balance is paid as agreed with the operator, normally after the charter unless otherwise agreed in writing.</li><li>Additional services, fuel surcharges, damages, or overtime may incur extra charges.</li></ul>
+    <ul><li>A deposit (usually €100) is requested only after we confirm availability and price, and is required to secure the booking.</li><li>The remaining balance is paid as agreed with the operator, normally after the charter unless otherwise agreed in writing.</li><li>Additional services, fuel surcharges, damages, or overtime may incur extra charges.</li></ul>
     <h3>4. 24-Hour Cancellation Policy</h3>
     <ul><li>More than 24 hours before departure: full refund of any deposit paid.</li><li>Less than 24 hours before departure: deposit is non-refundable.</li><li>No-shows or late arrivals are treated as a cancellation within 24 hours; deposit non-refundable.</li></ul>
     <h3>5. Food &amp; Beverages</h3>
@@ -258,7 +262,7 @@ footer a:hover{color:var(--coral)}
 </div>
 
 <footer>
-  © <span id="year"></span> MyCharters · <a href="index.html">Home</a> · Private boat charters across Malta &amp; Gozo
+  © <span id="year"></span> MyCharters · <a href="index.html">Home</a> · <a href="privacy.html">Privacy</a> · Private boat charters across Malta &amp; Gozo
 </footer>
 
 <script src="fleet.js"></script>
@@ -301,8 +305,8 @@ function applyBoat(id, keepCharter) {
   foodSel.innerHTML = '<option value="" disabled selected>Select an option</option>' + (boat.extras || []).map((x) =>
     `<option>${esc(x.name)}${x.price ? " · +" + MC.euro(x.price) : ""}</option>`).join("");
 
-  $("bookBtn").textContent = `Request Booking & Pay €${boat.deposit} Deposit`;
-  $("formNote").textContent = `On submit we pass your request to ${boat.operator}, then take you to the secure €${boat.deposit} Stripe deposit.`;
+  $("bookBtn").textContent = "Send Booking Request";
+  $("formNote").textContent = `No payment now. We confirm availability and price with ${boat.operator}, then send you a secure €${boat.deposit} deposit link.`;
 
   if (selDate && MC.bookedSet(boat).has(selDate)) { selDate = ""; syncDateBtn(); }
   cal.render();
@@ -380,7 +384,7 @@ if (params.get("session_id") || params.get("paid")) {
     <div class="bk-success">
       <div class="bk-badge"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
       <h3>Deposit received. Grazzi!</h3>
-      <p>Your deposit is in${pending ? ` for ${fmtDate(pending.date)}${paidBoat ? " aboard the " + esc(paidBoat.name) : ""}` : ""}. We're confirming the date with the operator now and will message you on WhatsApp shortly. If the boat can't take you, we'll offer another or refund your deposit in full.</p>
+      <p>Your deposit is in${pending ? ` for ${fmtDate(pending.date)}${paidBoat ? " aboard the " + esc(paidBoat.name) : ""}` : ""} and your charter is booked. We'll message you on WhatsApp with the meeting point and final details.</p>
       <a class="btn btn-coral" href="index.html">Back to home</a>
     </div>`;
 }
@@ -432,7 +436,7 @@ bookForm.addEventListener("submit", async e => {
     `Guests: ${v("fGuests")}`,
     extras ? `Extras: ${extras}` : null,
     `Allergies / dietary: ${v("fAllergy") || "None declared"}`,
-    `Deposit: €${boat.deposit} via Stripe`,
+    `Deposit: €${boat.deposit}, link to be sent after confirmation`,
     "Terms & Conditions: accepted"
   ].filter(Boolean).join("\n");
 
@@ -466,15 +470,18 @@ bookForm.addEventListener("submit", async e => {
   const waBtn = (num, label) => `<a class="btn" style="background:#25D366;color:#fff" href="https://wa.me/${num}?text=${waText}" target="_blank" rel="noopener">${waIcon}Send to ${label}</a>`;
   const sendBtns = `<p class="form-note" style="font-size:13px;color:rgba(255,255,255,.82);margin-bottom:-2px">Step 2 · Send us your booking details on WhatsApp</p>${waBtn("35679361991", "+356 7936 1991")}${waBtn("35677019333", "+356 7701 9333")}`;
 
-  const pending = JSON.stringify({ boat: boat.id, date }).replace(/"/g, "&quot;");
+  if (window.va) window.va("event", { name: "booking_request" });
   $("bookCard").innerHTML = `
     <div class="bk-success">
       <div class="bk-badge"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
-      <h3>Grazzi, ${esc(first)}! Just two quick steps.</h3>
-      <p>Your request for the ${esc(boat.name)} on ${fmtDate(date)} is in. Send us the details on WhatsApp, then hold the date with the €${boat.deposit} deposit.</p>
+      <h3>Grazzi, ${esc(first)}! Your request is in.</h3>
+      <p>We're checking the ${esc(boat.name)} for ${fmtDate(date)} with ${esc(boat.operator)}. Nothing to pay yet.</p>
       ${sendBtns}
-      <a class="btn btn-coral" href="${esc(boat.depositLink)}" target="_blank" rel="noopener" onclick="localStorage.setItem('mc_pending','${pending}')">Step 3 · Pay €${boat.deposit} deposit</a>
-      <p class="form-note">${esc(boat.operator)} confirms your date once the deposit is in. If the boat is unavailable, your deposit is refunded in full.<br>Free cancellation up to 24h before departure.</p>
+      <ol class="next-steps">
+        <li>We confirm availability and your price, usually within a few hours.</li>
+        <li>You get the confirmed quote with a secure €${boat.deposit} Stripe deposit link.</li>
+        <li>Your date is booked once the deposit is in. Free cancellation up to 24h before departure.</li>
+      </ol>
     </div>`;
 });
 </script>
