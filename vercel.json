@@ -2,5 +2,18 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "mycharters-website.vercel.app"
+        }
+      ],
+      "destination": "https://mychartersmlt.com/:path*",
+      "permanent": true
+    }
+  ]
 }

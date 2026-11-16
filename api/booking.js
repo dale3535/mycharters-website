@@ -39,7 +39,7 @@ module.exports = async function handler(req, res) {
     `Guests: ${clean(b.guests)}`,
     b.food ? `Extras: ${clean(b.food)}` : null,
     `Allergies: ${clean(b.allergies) || "None declared"}`,
-    `Deposit: €${deposit} via Stripe`,
+    `Deposit: €${deposit} — send the Stripe link after confirming`,
   ].filter(Boolean).join("\n");
 
   const auth = Buffer.from(`${SID}:${TOKEN}`).toString("base64");

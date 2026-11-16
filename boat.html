@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<script>if(location.hostname==="dale3535.github.io"){location.replace("https://mychartersmlt.com"+(location.pathname.replace(/^\/mycharters-website/,"").replace(/\.html$/,"").replace(/\/index$/,"/")||"/")+location.search);}</script>
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
+<script defer src="/_vercel/insights/script.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Boat Details | MyCharters Malta</title>
 <meta name="description" content="Private charter boat in Malta: prices, what's included, availability and booking.">
@@ -33,7 +36,7 @@
 </main>
 
 <footer>
-  © <span id="year"></span> MyCharters · <a href="index.html">Home</a> · <a href="fleet.html">Fleet</a>
+  © <span id="year"></span> MyCharters · <a href="index.html">Home</a> · <a href="fleet.html">Fleet</a> · <a href="privacy.html">Privacy</a>
 </footer>
 
 <script src="fleet.js"></script>
@@ -52,6 +55,8 @@ if (!boat) {
   </div>`;
 } else {
   document.title = `${boat.name} | Private Charter in Malta | MyCharters`;
+  const canon = document.createElement("link"); canon.rel = "canonical";
+  canon.href = "https://mychartersmlt.com/boat?boat=" + encodeURIComponent(boat.id); document.head.appendChild(canon);
   document.querySelector('meta[name="description"]').content = `${boat.name}: private ${boat.type.toLowerCase()} charter from ${boat.marina} for up to ${boat.guests} guests. ${boat.summary}`.slice(0, 160);
   const from = MC.fromPrice(boat);
   const bookHref = `booking.html?boat=${encodeURIComponent(boat.id)}`;
@@ -106,7 +111,7 @@ if (!boat) {
             <span>Up to ${boat.guests} guests</span><span>${esc(boat.length)}</span><span>${esc(boat.marina)}</span>
           </div>
           <a class="btn btn-coral" href="${bookHref}">Book this boat</a>
-          <p class="dep">Secure your date with a €${boat.deposit} deposit. ${esc(boat.operator)} confirms your booking; if the boat turns out to be unavailable, your deposit is refunded in full.</p>
+          <p class="dep">Send a free booking request. We confirm availability and price with ${esc(boat.operator)}, then you hold the date with a €${boat.deposit} deposit.</p>
         </div>
         <div class="panel glass">
           <h2>Availability</h2>
