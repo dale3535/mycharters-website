@@ -5,14 +5,25 @@
   "trailingSlash": false,
   "redirects": [
     {
-      "source": "/:path*",
+      "source": "/",
       "has": [
         {
           "type": "host",
           "value": "mycharters-website.vercel.app"
         }
       ],
-      "destination": "https://mychartersmlt.com/:path*",
+      "destination": "https://mychartersmlt.com/",
+      "permanent": true
+    },
+    {
+      "source": "/:path+",
+      "has": [
+        {
+          "type": "host",
+          "value": "mycharters-website.vercel.app"
+        }
+      ],
+      "destination": "https://mychartersmlt.com/:path+",
       "permanent": true
     }
   ]
